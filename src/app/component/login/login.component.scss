@@ -1,0 +1,59 @@
+.form{
+    
+    width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+     height: 60vh;
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    .login-link{
+        text-decoration: none;
+        padding: 5px 15px 5px 15px;
+        background-color: rgba(211, 209, 209, 0.5);
+        transition: all 0.2s;
+        color: #9ACD32;
+        &:hover{
+            border-radius: 2px;
+            background-color: rgba(211, 209, 209, 0.3);
+        }
+        &:active{
+            border-radius: 3px;
+            background-color: rgba(211, 209, 209, 0.2);
+        }
+    }
+
+    p{
+        .sign-up{
+            color: #9ACD32
+        }
+    }
+   
+} 
+
+
+.form-group{
+    width: 350px;
+    height: 35px;
+    position: relative;
+  
+    input{
+        position: absolute;
+        right: 20px;
+        width: 250px;
+        height: 30px;
+        padding: 6px 6px 6px 10px;
+        border-left:none ;
+        border-top:none ;
+        border-right:none ;
+        outline: none;
+    }
+
+    
+
+}

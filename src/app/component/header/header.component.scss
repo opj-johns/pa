@@ -1,0 +1,67 @@
+.topbar{
+    background-color: #3A436F;
+    color: white;
+    font-size: 11px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.nav{
+    background-color: #3A436F;
+    color: white;
+    font-size: 11px;
+
+}
+
+.search{
+    border-radius: 4px;
+    width: 600px;
+    height: 36px;
+    background-color: white;
+    .search-bar
+    {
+        width: 45%;
+        height: 35px;
+        padding: 3px 3px 3px 5px;
+        font-size: 16px;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        
+    }
+    
+    .category-select{
+        width: 45%;
+        border-radius: 0px;
+        font-size: 16px;
+        height: 35px;
+        padding: 3px 3px 3px 5px;   
+        border:none;
+    }
+
+    .btn-search{
+        width: 10%;
+        height: 35px;
+        font-size: 16px;
+        border:none;
+        background-color: white;
+        color: green;
+        border-radius: 4px;
+        padding-left:7px ;
+        padding-right: 3px;
+       
+    }
+
+   
+}
+
+.menu-wrapper{
+    // font-size: 25px;
+    // border: 1px solid red;
+    color: white;
+    color: yellowgreen;
+}
+
+.bi{
+    color: yellowgreen;
+    
+}
