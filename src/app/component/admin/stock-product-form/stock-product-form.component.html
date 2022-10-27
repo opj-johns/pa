@@ -1,0 +1,130 @@
+
+    <p class="text-center fs-5 p-2 text-success">Formulaire Produit</p>
+ <div class="form-wrapper p-2">
+
+     <form [formGroup]="productForm" (ngSubmit)="onSubmit()" >
+        <div class="row mb-5 text-center">
+            <label for="" class="col-sm-2 col-form-label form-label ">Libéllé</label>
+                    <div class="col-sm-6 ">
+                        <input type="text" class="form-control" formControlName="name">
+                    </div>
+        </div>
+        <div class="row  mb-5">
+            <label for="" class="col-sm-2 col-form-label form-label ">Prix de vente</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" formControlName="price">
+            </div>
+        </div>
+        <div class="row mb-5">
+            <label for="" class="col-sm-2 col-form-label form-label " >Quantité en stock</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" formControlName="qtyInStock">
+            </div>
+        </div>
+        <div class="row mb-5">
+            <label for="catgory" class="col-sm-2 col-form-label form-label ">Catégory</label>
+            <div class="col-sm-6">
+            <select name="catgory" id="catgory" class="form-select" formControlName="categoryId">
+                    <option [value]="category.id" *ngFor="let category of categories">{{category.signature}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <label for="supplier" class="col-sm-2 col-form-label form-label ">Fournisseur</label>
+            <div class="col-sm-6">
+                <select name="supplier" id="supplier" class="form-select" formControlName="supplierId">
+                    <option [value]="supplier.id" *ngFor="let supplier of suppliers">{{supplier.name}}</option>
+                </select>
+            </div>
+         </div>
+
+         <div class="row mb-2">
+              <p>Ajouter L'image du produit</p>
+                <label for="image" >Chosir l'image...</label>
+                <p *ngIf="url"><img [src]="url"  height="200" width="300"></p>
+                <div class="col-sm-6">
+                    <input type="file" (change)="onFileChanged($event)" name="image" id="image" class="inputfile" />
+                </div>
+         </div>
+         
+         <div class="row mb-5">
+            <div class="col-6">
+
+                <label for="floatingTextarea"  class="m-2 form-label" >Description</label>
+                <textarea class="form-control" 
+                          rows="5" 
+                          formControlName="description"
+                          placeholder="Quelques informations du produit" 
+                          id="floatingTextarea"></textarea>
+            </div>
+         </div>
+         <div class="row text-center">
+            <div class="col-1 ">
+                <button class="btn btn-success "[disabled]="!(productForm.valid&&selectedFile)" type="submit">Envoyer</button>
+            </div>
+         </div>
+         
+     </form>
+ </div>
+
+    <!-- <form >
+        <div class="row p-2">
+            <div class="col-sm">
+                
+            <div class="col-sm">
+                 
+                 
+                 
+            </div>
+
+        </div>
+        
+       <div class="row m-3">
+        <div class="col">
+            <button class="m-2" mat-raised-button >Sauvegarder</button>
+            <button   mat-raised-button >Annuler</button>
+        </div>
+       </div>
+    </form> -->
+
+<!-- <div class="container row">
+    <div class="col-md-12">
+        <h1>Upload Image</h1>
+    </div>
+</div>
+
+<div class="container row">
+    <div class="col-md-6">
+        <input type="file" (change)="onFileChanged($event)">
+    </div>
+    <div class="col-md-6">
+        <input type="button" (click)="onUpload()" value="upload">
+    </div>
+</div>
+
+<hr />
+<div class="container row">
+    <div class="col-md-12">
+        <div *ngIf=message>{{message}}</div>
+    </div>
+</div>
+
+<div class="container row">
+    <div class="col-md-6">
+        <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName"
+            name="name" />
+    </div>
+    <div class="col-md-6">
+        <input type="button" (click)="getImage()" value="Get Image">
+
+    </div>
+</div>
+
+<div class="container row">
+    <div class="col-md-12">
+        <div *ngIf=retrievedImage>
+            <img [src]="retrievedImage">
+        </div>
+    </div>
+</div> -->

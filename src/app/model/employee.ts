@@ -5,6 +5,5 @@ export class Employee{
    email!:string;
    phone!: string;
    salary!: number;
-   password!:string;
 }
 

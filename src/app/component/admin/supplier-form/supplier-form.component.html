@@ -1,0 +1,51 @@
+<h2 class="text-center p-2 fs-5 fw-bold text-primary" >Formulaire Fournisseur</h2>
+<form  [formGroup]="supplierForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3 row">
+        <label for="name" class="col-sm-2 col-form-label form-label fw-bold" >Nom</label>
+        <div class="col-sm-6 mb-2">
+          <input type="text" id="name" name="name" class="form-control" formControlName="name"> 
+          <div *ngIf="supplierForm.controls['name'].invalid && supplierForm.controls['name'].dirty" class="fs-6 text-danger p-1">
+             Nom est invalid
+          </div>
+        </div>
+        </div>
+ 
+
+  <div class="mb-3 row">
+    <label for="email" class="col-sm-2 col-form-label fw-bold form-label" >Email</label>
+    <div class="col-sm-6 mb-2" >
+      <input type="text" id="email" name="email" class="form-control" formControlName="email">
+      <div *ngIf="supplierForm.controls['email'].invalid && supplierForm.controls['email'].dirty" class="fs-6 text-danger p-1">
+        Email est invalid
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="address" class="col-sm-2 col-form-label fw-bold form-label" >Adresse</label>
+    <div class="col-sm-6 mb-2" >
+      <input type="text" id="address" name="address" class="form-control" formControlName="address">
+      <div *ngIf="supplierForm.controls['address'].invalid && supplierForm.controls['address'].dirty" class="fs-6 text-danger p-1">
+        Addresse est invalid
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="tel" class="col-sm-2 col-form-label fw-bold form-label">Phone</label>
+    <div class="col-sm-6 mb-2" >
+      <input type="text" id="tel" name="tel" class="form-control" formControlName="tel">
+      <div *ngIf="supplierForm.controls['tel'].invalid && supplierForm.controls['tel'].dirty" class="fs-6 text-danger p-1">
+        Phone est invalid
+     </div>
+    </div>
+   </div>
+
+   <input type="number" name="id" hidden formControlName="id">
+
+  <div class="btns">
+    <button type="submit" [disabled]="!supplierForm.valid" class="btn btn-primary m-2"><span *ngIf="supplierId===0">Créer</span><span *ngIf="supplierId!==0">Mettre à jour</span></button>
+    <button type="button" (click)="cancel()" class="btn btn-warning m-2">Annuler</button>
+  </div>
+  
+</form>

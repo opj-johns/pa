@@ -1,0 +1,16 @@
+
+form {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+    margin-left: 25%;
+
+    .btns {
+        display: flex;
+        width: 230px;
+        justify-content: space-between;
+    }
+}
+
+label{
+    font-style: italic;
+}

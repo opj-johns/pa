@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row">
+            <div class="col-sm p-3  text-center  fs-4">
+               <p ><span class="p-2  text-success">Nos produits </span> <i [matBadge]="prodsInStock" matBadgeColor="accent" class="bi bi-capsule"></i></p>
+                    
+            </div>
+            <div class="col-sm p-3 text-center fs-4">
+                <p class="m-2" ><span class="p-2  text-success" > Panier </span> <i [matBadge]="numberOfProdsInCart" matBadgeColor="accent" class="bi bi-cart3"></i></p>
+                 <p class=" fs-6 pt-1"><span class="text-success">Montant:</span>&nbsp;&nbsp;{{totalCartPrice | currency:'USD'}}</p>   
+            </div>
+     </div>
+        <div class="row fs-5 fw-bold text-center">
+
+             <div class="col-sm">
+                 <app-order-product-table  (productQuantity)="getProductQuantity($event)"></app-order-product-table>
+             </div>
+            
+                <div class="col-sm">
+                    <app-cart-table ></app-cart-table>
+                </div>
+
+        </div>
+</div>
+
+

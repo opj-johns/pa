@@ -1,0 +1,58 @@
+<h2 class="text-center p-2 fs-5 fw-bold text-primary" >Formulaire Client</h2>
+<form  [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3 row">
+        <label for="lastName" class="col-sm-2 col-form-label form-label fw-bold" >Nom</label>
+        <div class="col-sm-6 mb-2">
+          <input type="text" id="lastName" name="lastName" class="form-control" formControlName="lastName"> 
+          <div *ngIf="clientForm.controls['lastName'].invalid && clientForm.controls['lastName'].dirty" class="fs-6 text-danger p-1">
+             Prénom est invalid
+          </div>
+        </div>
+        </div>
+  <div class="mb-3 row">
+    <label for="firstName" class="col-sm-2 col-form-label fw-bold form-label" >Prénom</label>
+    <div class="col-sm-6 mb-2">
+      <input type="text" id="firstName" name="firstName" class="form-control" formControlName="firstName"> 
+      <div *ngIf="clientForm.controls['firstName'].invalid && clientForm.controls['firstName'].dirty" class="fs-6 text-danger p-1">
+         Prénom est invalid
+      </div>
+    </div>
+    </div>
+
+  <div class="mb-3 row">
+    <label for="email" class="col-sm-2 col-form-label fw-bold form-label" >Email</label>
+    <div class="col-sm-6 mb-2" >
+      <input type="text" id="email" name="email" class="form-control" formControlName="email">
+      <div *ngIf="clientForm.controls['email'].invalid && clientForm.controls['email'].dirty" class="fs-6 text-danger p-1">
+        Email est invalid
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="address" class="col-sm-2 col-form-label fw-bold form-label" >Adresse</label>
+    <div class="col-sm-6 mb-2" >
+      <input type="text" id="address" name="address" class="form-control" formControlName="address">
+      <div *ngIf="clientForm.controls['address'].invalid" class="fs-6 text-danger p-1">
+        Addresse est invalid
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="phone" class="col-sm-2 col-form-label fw-bold form-label" >Phone</label>
+    <div class="col-sm-6 mb-2" >
+      <input type="text" id="phone" name="phone" class="form-control" formControlName="phone">
+      <div *ngIf="clientForm.controls['phone'].invalid && clientForm.controls['phone'].dirty" class="fs-6 text-danger p-1">
+        Phone est invalid
+     </div>
+    </div>
+   </div>
+
+   <input type="number" name="id" hidden formControlName="id">
+
+  <div class="btns">
+    <button type="submit" [disabled]="!clientForm.valid" class="btn btn-primary m-2"><span *ngIf="clientId===0">Créer</span><span *ngIf="clientId!==0">Mettre à jour</span></button>
+    <button type="button" (click)="cancel()" class="btn btn-warning m-2">Annuler</button>
+  </div>
+</form>
