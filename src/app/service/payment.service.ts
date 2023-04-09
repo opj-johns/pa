@@ -5,13 +5,14 @@ import { Payment } from '../model/payment';
 import { PaymentDialogData } from '../model/payment-dialog-data';
 import { PaymentType } from '../model/payment-type';
 import { ShopOrder } from '../model/shop-order';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
 
-  baseUrl = "http://localhost:8080/api/payment"
+  url = environment.baseUrl+"/api/payment"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,12 +20,12 @@ export class PaymentService {
     let order = new ShopOrder();
     order.id = orderId;
     
-    return this.httpClient.post<PaymentDialogData[]>(`${this.baseUrl}/payment-dialogs`, order);
+    return this.httpClient.post<PaymentDialogData[]>(`${this.url}/payment-dialogs`, order);
     
   }
 
   fetchPaymentTypes():Observable<PaymentType[]>{
-     return this.httpClient.get<PaymentType[]>(`${this.baseUrl}/types`);
+     return this.httpClient.get<PaymentType[]>(`${this.url}/types`);
   }
 
   makePayment(amountPaid:number, paymentTypeId:number, orderId:number):Observable<Payment>{
@@ -40,7 +41,7 @@ export class PaymentService {
     payment.shopOrder = order;
     payment.paymentType = paymentType;
 
-    return this.httpClient.post<Payment>(`${this.baseUrl}/save`, payment);
+    return this.httpClient.post<Payment>(`${this.url}/save`, payment);
 
   }
 

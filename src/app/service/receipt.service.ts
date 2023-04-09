@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Receipt } from '../model/receipt';
 import { ShopOrder } from '../model/shop-order';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReceiptService {
-  baseUrl = "http://localhost:8080/api/receipt"
+  url = environment.baseUrl+"/api/receipt";
   constructor(private httpClient: HttpClient) { }
 
   
@@ -20,13 +21,13 @@ export class ReceiptService {
     receipt.date= new Date();
     console.log("saving receipt...",receipt);
     
-    return  this.httpClient.post<Receipt>(`${this.baseUrl}/save`, receipt)
+    return  this.httpClient.post<Receipt>(`${this.url}/save`, receipt)
   }
 
 
   getReceipt(orderId:number):Observable<Receipt>{
      let order = new ShopOrder();
      order.id =orderId;
-    return this.httpClient.post<Receipt>(`${this.baseUrl}/fetch-by-order`, order);
+    return this.httpClient.post<Receipt>(`${this.url}/fetch-by-order`, order);
   }
 }

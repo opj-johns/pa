@@ -8,6 +8,7 @@ import { Employee } from '../model/employee';
 import { OrderDetail } from '../model/order-detail';
 import { Product } from '../model/product';
 import { ShopOrder } from '../model/shop-order';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,14 @@ import { ShopOrder } from '../model/shop-order';
 export class OrderDetailService {
 
   
-  baseUrl = "http://localhost:8080/api/order-detail";
+  url = environment.baseUrl+"/api/order-detail";
 
   constructor(private httpClient: HttpClient) { }
 
   fetchDialogProducts(orderId:number):Observable<DialogProduct[]>{
     let order : ShopOrder = new ShopOrder();
     order.id = orderId;
-    return this.httpClient.post<DialogProduct[]>(`${this.baseUrl}/dialog-products`, order );
+    return this.httpClient.post<DialogProduct[]>(`${this.url}/dialog-products`, order );
   }
 
   updateDetails(orderId:number, cartProducts:CartTableData[]):Observable<OrderDetail[]>{
@@ -43,7 +44,7 @@ export class OrderDetailService {
       orderDetails.push(orderDetail);
     })
 
-    return  this,this.httpClient.post<OrderDetail[]>(`${this.baseUrl}/update`,orderDetails);
+    return  this,this.httpClient.post<OrderDetail[]>(`${this.url}/update`,orderDetails);
   }
 
   save(employeeId: number, 
@@ -89,7 +90,7 @@ export class OrderDetailService {
  })
 
 
- return this.httpClient.post<OrderDetail[]>(`${this.baseUrl}/save`, orderDetails);
+ return this.httpClient.post<OrderDetail[]>(`${this.url}/save`, orderDetails);
  
 
 }
@@ -98,7 +99,7 @@ export class OrderDetailService {
     let order = new ShopOrder();
     order.id = orderId;
 
-    return this.httpClient.post<OrderDetail[]>(`${this.baseUrl}/by-order`, order);
+    return this.httpClient.post<OrderDetail[]>(`${this.url}/by-order`, order);
   }  
 
 

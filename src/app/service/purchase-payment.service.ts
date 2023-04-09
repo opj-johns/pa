@@ -5,12 +5,13 @@ import { PaymentDialogData } from '../model/payment-dialog-data';
 import { PaymentType } from '../model/payment-type';
 import { Purchase } from '../model/purchase';
 import { PurchasePayment } from '../model/purchase-payment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PurchasePaymentService {
-  baseUrl = "http://localhost:8080/api/purchase-payment"
+  url = environment.baseUrl+"/api/purchase-payment"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -18,7 +19,7 @@ export class PurchasePaymentService {
     let purchase = new Purchase();
     purchase.id = purchaseId;
     
-    return this.httpClient.post<PaymentDialogData[]>(`${this.baseUrl}/dialog-data`, purchase);
+    return this.httpClient.post<PaymentDialogData[]>(`${this.url}/dialog-data`, purchase);
     
   }
 
@@ -35,12 +36,12 @@ export class PurchasePaymentService {
     payment.purchase = purchase;
     payment.paymentType = paymentType;
 
-    return this.httpClient.post<PurchasePayment>(`${this.baseUrl}/save`, payment);
+    return this.httpClient.post<PurchasePayment>(`${this.url}/save`, payment);
 
   }
 
   fetchPaymentTypes():Observable<PaymentType[]>{
-    return this.httpClient.get<PaymentType[]>(`${this.baseUrl}/types`);
+    return this.httpClient.get<PaymentType[]>(`${this.url}/types`);
  }
 
   

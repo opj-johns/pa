@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Command } from '../model/command';
 import { ShopOrder } from '../model/shop-order';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  baseUrl = "http://localhost:8080/api/order"
+  url = environment.baseUrl+"/api/order";
   
 
   constructor(private httpClient: HttpClient) { }
@@ -17,12 +18,12 @@ export class OrderService {
  
 
   fetchCommands():Observable<Command[]>{
-   return this.httpClient.get<Command[]>(`${this.baseUrl}/commands`);
+   return this.httpClient.get<Command[]>(`${this.url}/commands`);
   }
 
 
   getOrder(orderId: number):Observable<ShopOrder>{
-    return this.httpClient.get<ShopOrder>(`${this.baseUrl}/${orderId}`);
+    return this.httpClient.get<ShopOrder>(`${this.url}/${orderId}`);
   }
 
   deleteOrder(orderId:number):Observable<void>{
@@ -30,7 +31,7 @@ export class OrderService {
      let order = new ShopOrder();
      order.id = orderId;
 
-    return this.httpClient.post<void>(`${this.baseUrl}/delete`, order);
+    return this.httpClient.post<void>(`${this.url}/delete`, order);
   }
 
 
