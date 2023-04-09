@@ -1,0 +1,36 @@
+.example-container {
+    height: 300px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+ 
+
+  .mat-column-productName,
+  .mat-column-productUrl,
+  .mat-column-quantity,
+  .mat-column-price{
+    text-align: center;
+  }
+
+  .mat-column-quantity{
+    width: 10%;
+  }
+
+  .mat-column-price{
+    width: 10%;
+  }
+
+
+  .mat-column-productName{
+    width: 60%;
+  }
+
+  .title{
+    text-align: center;
+  }
+
+

@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 50%;
+  }
+  
+  td, th {
+    width: fit-content;
+    
+  }
+  td{
+    text-align: left;
+  }
+  i{
+    &:hover{
+      cursor: pointer;
+    }
+  }

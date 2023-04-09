@@ -1,0 +1,50 @@
+<div class="container ">
+    <div class="row ">
+        <form >
+          <div *ngIf="!supplierName">
+            <mat-form-field appearance="fill" >
+                <mat-label>Fournisseur</mat-label>
+                <mat-select [(ngModel)]="selectedSupplierId" name="supplier" (selectionChange)="updateSelectedSupplier()">
+                  <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
+                    {{supplier.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+              <mat-form-field class="example-full-width " appearance="fill" >
+                <mat-label class="text-primary">Fournisseur</mat-label>
+                <input type="email" class="fs-6 fw-bold text-success" matInput [value]="supplierName" disabled="true">
+              </mat-form-field>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

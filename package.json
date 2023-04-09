@@ -24,6 +24,7 @@
     "bootstrap-icons": "^1.9.1",
     "highcharts": "^10.2.1",
     "highcharts-angular": "^3.0.0",
+    "ngx-capture": "^0.12.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

@@ -1,14 +1,14 @@
-<form  class="form mt-3" action="">
+<form  class="form mt-3" #loginForm="ngForm">
    <p>SIGN IN</p>
 
     <div class="form-group mb-3">
-        <label class="mr-4 pt-2" for="username">Username</label>
+        <label class="mr-4 pt-2" for="username" [(ngModel)]="username">Username</label>
         <input type="text">
     </div>
     <div class="form-group mb-3">
-        <label  class=" pt-2" for="password">Password</label>
-        <input class="ml-4" type="text">
+        <label  class=" pt-2" for="password" [(ngModel)]="password">Password</label>
+        <input class="ml-4" type="text" >
     </div>
      <a href="" class="login-link">login</a>
-     <p>don't have an account? <a class="sign-up" href="#">sign up!</a></p>
+     <p>don't have an account? <a class="sign-up" >sign up!</a></p>
 </form>

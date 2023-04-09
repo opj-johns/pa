@@ -1,0 +1,42 @@
+<form #purchaseDetailForm="ngForm" >
+
+    <h2 mat-dialog-title class="title text-success fs-5 ">Détails d'achat</h2>
+    <mat-dialog-content class="mat-typography">
+      <section tabindex="0">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+                    <mat-form-field class="example-full-width"  appearance="fill">
+                      <mat-label>Prix d'achat <i class="bi bi-currency-dollar fs-6 ps-1 text-success"></i></mat-label>
+                      <input matInput name="amountPaid" type="number" min="1" required="true"  [(ngModel)]="purchasePrice" name="purchasePrice">
+                    </mat-form-field>
+            </div>
+            
+            <div class="col-4">
+                    <mat-form-field class="example-full-width"  appearance="fill">
+                      <mat-label>Prix de vente <i class="bi bi-currency-dollar fs-6 ps-1 text-success"></i></mat-label>
+                      <input matInput name="amountPaid" type="number" min="1" required="true"  [(ngModel)]="sellingPrice" name="sellingPrice">
+                    </mat-form-field>
+            </div>
+            
+            <div class="col-4">
+                    <mat-form-field class="example-full-width"  appearance="fill">
+                      <mat-label>Quantité <i class="bi bi-bag-plus fs-6 ps-1 text-success"></i> </mat-label>
+                      <input matInput name="amountPaid" type="number" required="true" min="1" [(ngModel)]="quantity" name="quantity">
+                    </mat-form-field>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+       </section>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button    type="button"
+                (click)="onOkClicked()" 
+                [disabled]="purchaseDetailForm.invalid || sellingPrice==0 ||  purchasePrice==0 || quantity==0">Ok</button>
+      <button mat-button (click)="closeDialog()"  cdkFocusInitial>Annuler</button>
+    </mat-dialog-actions>
+    
+    </form>

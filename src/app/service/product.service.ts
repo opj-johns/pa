@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductWrapper } from '../model/data_models/product_wrapper';
 import { Product } from '../model/product';
 
 @Injectable({
@@ -13,8 +12,8 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
   
-  fetchProducts():Observable<ProductWrapper[]>{
-    return this.httpClient.get<ProductWrapper[]>(`${this.baseUrl}/all`);
+  fetchProducts():Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`${this.baseUrl}/all`);
   }
 
   fetchProduct(id:number):Observable<Product>{
@@ -30,7 +29,7 @@ export class ProductService {
   }
 
   deleteProduct(product:Product):Observable<void>{
-    return this.httpClient.post<void>(`{this.baseUrl}/delete`, product);
+    return this.httpClient.post<void>(`${this.baseUrl}/delete`, product);
   }
 
   

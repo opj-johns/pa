@@ -29,4 +29,5 @@ export class CartService {
   changeTotalPrice(totalPrice:number){
     this.totalPrice.next(totalPrice);
   }
+  
 }

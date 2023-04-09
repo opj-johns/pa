@@ -3,3 +3,31 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-header-cell {
+    color: green;
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #101423;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .mat-cell{
+
+    color: white;
+  }
+
+  .mat-row{
+    background-color: #101423;
+    
+  }
+
+ 
+
+  // .mat-header{
+
+  // }
+
+  // .mat-footer{
+
+  // }

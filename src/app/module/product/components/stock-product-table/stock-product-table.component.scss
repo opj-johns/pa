@@ -1,0 +1,29 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 50%;
+  }
+  
+  
+  td{
+    text-align: left;
+  }
+
+
+  i{
+    &:hover{
+      cursor: pointer;
+    }
+  }
+ 
+.mat-column-name,
+.mat-column-category,
+.mat-column-price,
+.mat-column-qtyInStock,
+.mat-column-actions
+{
+  text-align: center;
+}

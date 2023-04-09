@@ -1,0 +1,73 @@
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col text-center">
+            <mat-form-field appearance="standard">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+            </mat-form-field>
+            
+        </div>
+        </div>
+        <div class="row">
+            <div class="col text-center m-3 fs-1">
+               <a routerLink="/admin/client/form"><i  class="bi bi-plus-circle-fill text-success"></i></a>
+            </div>
+         </div>
+        <div class="row">
+            <div class="col p-0">
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" matSort>
+                
+                    <!-- LastName Column -->
+                    <ng-container matColumnDef="lastName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+                        <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
+                    </ng-container>
+                
+                    <!-- FirstName Column -->
+                    <ng-container matColumnDef="firstName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </th>
+                        <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+                    </ng-container>
+                
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+                    </ng-container>
+
+                    <!-- Phone Column -->
+                    <ng-container matColumnDef="phone">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+                        <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+                    </ng-container>
+
+                    <!-- Address Column -->
+                    <ng-container matColumnDef="address">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Adresse </th>
+                        <td mat-cell *matCellDef="let row"> {{row.address}} </td>
+                    </ng-container>
+                
+                    <!-- Fruit Column -->
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                        <td mat-cell *matCellDef="let row">  
+                            <i (click)="deleteClient(row)" class="bi bi-person-x-fill text-danger p-1 fs-5"></i>
+                            <i (click)="goToForm(row)" class="bi bi-pencil-square fs-5 p-1 text-success"></i>
+                        </td>
+                    </ng-container>
+                
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>    
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+                
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                    </table>
+                
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                </div>      
+            </div>
+        </div>
+    </div>

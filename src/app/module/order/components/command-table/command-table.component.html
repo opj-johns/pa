@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="row text-center fs-3">
+    <a routerLink="/admin/order"><i  class="bi bi-plus-circle-fill text-success"></i></a>
+   
+</div>
+    <div class="row" *ngIf="!commands">
+      <p class="text-center fs-5 text-success pt-2">Loading order details...</p>
+    </div>
+    <div class="row" *ngIf="commands">
+        <div class="col">
+          
+            <mat-form-field appearance="standard">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Chercher" #input>
+              </mat-form-field>
+              
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort>
+              
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="clientName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                    <td mat-cell *matCellDef="let row"> {{row.clientName}} </td>
+                  </ng-container>
+              
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="employeeName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Employé </th>
+                    <td mat-cell *matCellDef="let row"> {{row.employeeName}} </td>
+                  </ng-container>
+
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Etat </th>
+                    <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+                  </ng-container>
+
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de Command </th>
+                    <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="numberOfProducts">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> N° Eléments </th>
+                    <td mat-cell *matCellDef="let row"> <a class="anchore" (click)="openProductDialog(row.orderId)">{{row.numberOfProducts}}</a> </td>
+                  </ng-container>
+              
+                  <!-- Fruit Column -->
+                  <ng-container matColumnDef="ttc">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> TTC </th>
+                    <td mat-cell *matCellDef="let row"> {{row.ttc | currency:'USD'}} </td>
+                  </ng-container>
+
+                  <!-- Fruit Column -->
+                  <ng-container matColumnDef="amountPaid">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Réglement </th>
+                    <td mat-cell *matCellDef="let row"> <a class="anchore"  (click)="openPaymentDialog(row.orderId)" >{{row.amountPaid | currency:'USD'}}</a> </td>
+                  </ng-container>
+
+                  <!-- Fruit Column -->
+                  <ng-container matColumnDef="amountUnpaid">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Crédit </th>
+                    <td mat-cell *matCellDef="let row"> {{row.amountUnpaid | currency:'USD'}} </td>
+                  </ng-container>
+
+                  <!-- Fruit Column -->
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                    <td mat-cell *matCellDef="let row"> 
+                      <i (click)="onDelete(row.orderId)" title="supprimer" class="bi bi-trash text-danger actiopns"></i> 
+                      <i  (click)="onMakeOrder(row.orderId)" title="ajouter des produits" class="bi bi-plus-circle text-success actions"></i> 
+                      
+
+                          <button style="border:none; padding: 0; margin: 0; background-color:transparent;" 
+                                  [disabled]="row.amountPaid===row.ttc"
+                                  title="payer" 
+                                  (click)="onPayOrder(row.orderId, row.amountUnpaid)">
+                                  <i class="bi bi-currency-dollar text-success fs-6"></i> 
+                          </button>
+
+                      <button style="border:none; padding: 0; margin: 0; background-color:transparent;" 
+                              [disabled]="row.amountPaid!==row.ttc" 
+                              (click)="onShowReceipt(row.orderId)" 
+                              title="générer récu">
+                              <i class="bi bi-receipt text-success  fs-6"></i>
+                      </button> 
+                    
+                    </td>
+                  </ng-container>
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  </tr>
+                </table>
+              
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+              </div>
+              
+        </div>
+    </div>
+</div>

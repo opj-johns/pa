@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class ProductPhotoService {
 
-  baseUrl = "http://localhost:8080/api/image/fileSystem"
+  baseUrl = "http://localhost:8080/api/image/fileSystem";
 
   constructor(private httpClient: HttpClient) { }
 
   saveImage(formData: FormData): Observable<String>{
-    return this.httpClient.post<String>(`${this.baseUrl}`, formData);
+    return this.httpClient.post<String>(`${this.baseUrl}`, formData );
   }
 }

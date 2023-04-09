@@ -1,0 +1,29 @@
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="typeOfPayment">
+      <mat-header-cell *matHeaderCellDef> Type de Paiement </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.typeOfPayment}} </mat-cell>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="amountPaid">
+      <mat-header-cell *matHeaderCellDef> Montant </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.amountPaid | currency:'USD'}} </mat-cell>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef> Heure </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <p class="pt-4">Montant Total Payé: <span>{{totalAmountPaid|currency:'USD'}}</span></p>

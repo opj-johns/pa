@@ -1,0 +1,45 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width:fit-content;
+  }
+  .mat-column-amountUnpaid,
+  .mat-column-supplier,
+  .mat-column-status,
+  .mat-column-numberOfProducts,
+  .mat-column-ttc,
+  .mat-column-amountUnpaid,
+  .mat-column-amountPaid,
+  .mat-column-actions,
+  .mat-column-date
+  {
+     text-align: center;
+  }
+
+ 
+
+.anchore{
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.actions{
+  font-size: 18px;
+  margin: 2px;
+
+  &:hover{
+    cursor: pointer;
+    background-color: rgb(241, 233, 233) ;
+  }
+}
+
+
+

@@ -1,0 +1,46 @@
+<h2 mat-dialog-title class="title">Histoire de Paiment</h2>
+<mat-dialog-content class="mat-typography">
+  <section class="example-container mat-elevation-z8" tabindex="0">
+  
+    <div *ngIf="showTable then table else noData"></div>
+   <ng-template #table>
+     <table mat-table [dataSource]="dataSource">
+   
+       <!-- Position Column -->
+       <ng-container matColumnDef="typeOfPayment">
+         <th mat-header-cell *matHeaderCellDef> Type de Paiment </th>
+         <td mat-cell *matCellDef="let element"> {{element.typeOfPayment}} </td>
+       </ng-container>
+   
+       <!-- Name Column -->
+       <ng-container matColumnDef="amountPaid">
+         <th mat-header-cell *matHeaderCellDef> Monatant Payé </th>
+         <td mat-cell *matCellDef="let element"> {{element.amountPaid|currency:'USD'}} </td>
+       </ng-container>
+   
+       <!-- Weight Column -->
+       <ng-container matColumnDef="date">
+         <th mat-header-cell *matHeaderCellDef> Date </th>
+         <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+       </ng-container>
+   
+       <!-- Symbol Column -->
+       <ng-container matColumnDef="time">
+         <th mat-header-cell *matHeaderCellDef> Heure </th>
+         <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+       </ng-container>
+   
+       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+     </table>
+   </ng-template> 
+   <ng-template #noData>
+     <div class="text-primary fs-4 fw-bold text-center mt-2 ">
+      <h2>Aucun paiment n'est effectué :(</h2>
+     </div>
+   </ng-template>
+</section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>

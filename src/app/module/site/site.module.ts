@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { HeaderComponent } from 'src/app/component/site/header/header.component';
-import { FooterComponent } from 'src/app/component/site/footer/footer.component';
 import { BaseModule } from 'src/app/shared/base/base.module';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HomeViewComponent } from './components/home-view/home-view.component';
+import { HomeComponent } from './components/home/home.component';
 import { SiteRoutingModule } from './site-routing.module';
-import { HomeComponent } from 'src/app/component/site/home/home.component';
-import { HomeViewComponent } from 'src/app/component/site/home-view/home-view.component';
 
 
 

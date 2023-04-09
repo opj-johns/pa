@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+       <div class="col text-center">
+        <mat-form-field appearance="standard">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+          </mat-form-field>
+          
+       </div>
+    </div>
+    <div class="row">
+      <div class="col text-center m-3 fs-1">
+         <a routerLink="/admin/product/form"><i  class="bi bi-plus-circle-fill text-success" ></i></a>
+      </div>
+   </div>
+    <div class="row ">
+        <div class="col p-0">
+              <div class="mat-elevation-z8 " >
+                <table mat-table [dataSource]="dataSource" matSort>
+              
+                  <!-- Image Column -->
+                  <ng-container matColumnDef="image">
+                    <th style="width:20% " mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+                    <td style="width:20% " mat-cell  *matCellDef="let row">
+                      <div class="img-wrapper">
+                        <img [src]="row.imageUrl" width="100px" height="100px" alt="product image"/>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <th style="width:40%" mat-header-cell *matHeaderCellDef mat-sort-header> Libéllé </th>
+                    <td style="width:40%" mat-cell  *matCellDef="let row"> {{row.name}} </td>
+                  </ng-container>
+
+                  <!-- Category Column -->
+                  <ng-container matColumnDef="category">
+                    <th style="width:10%" mat-header-cell *matHeaderCellDef mat-sort-header> Catégory </th>
+                    <td style="width:10%" mat-cell  *matCellDef="let row"> {{row.category.signature}} </td>
+                  </ng-container>
+              
+                  <!-- Price Column -->
+                  <ng-container matColumnDef="price">
+                    <th style="width:10%" mat-header-cell *matHeaderCellDef mat-sort-header> Prix </th>
+                    <td style="width:10%" mat-cell *matCellDef="let row"> {{row.price | currency: 'USD'}}</td>
+                  </ng-container>
+              
+                  <!-- Qty in stock Column -->
+                  <ng-container matColumnDef="qtyInStock">
+                    <th  style="width:5%" mat-header-cell *matHeaderCellDef mat-sort-header> Quantité en Stock </th>
+                    <td style="width:5%"  mat-cell *matCellDef="let row"> {{row.qtyInStock }} </td>
+                  </ng-container>
+              
+                  <!-- Actions Column -->
+                  <ng-container matColumnDef="actions"> 
+                    <th style="width:15%" mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                    <td style="width:15%" 
+                        mat-cell 
+                        *matCellDef="let row"><i  class="bi bi-trash text-danger fs-5 p-1 hover" (click)="onDelete(row)"></i>
+                        <i (click)="openEditPage(row.id)" class="bi bi-pencil-square text-success fs-5 p-1"></i></td>
+                  </ng-container>
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  </tr>
+                </table>
+              
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+              </div>  
+        </div>
+       
+    </div>
+
+</div>
+
