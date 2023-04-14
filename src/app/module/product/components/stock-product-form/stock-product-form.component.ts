@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/model/category';
@@ -18,6 +18,7 @@ import { SupplierService } from 'src/app/service/supplier.service';
 })
 export class StockProductFormComponent implements OnInit {
 
+  @ViewChild('imageInput') myInputRef!: ElementRef<HTMLInputElement>;
   selectedFile!: File;
   retrievedImage: any;
   base64Data: any;
@@ -34,6 +35,7 @@ export class StockProductFormComponent implements OnInit {
   
   newProduct!: Product;
   imageFormData: FormData = new FormData();
+
   oldProduct!: Product;
 
   url="";
@@ -48,15 +50,15 @@ export class StockProductFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let productId = Number(this.activatedRoute.snapshot.paramMap.get("id"));
+    let paramValue = this.activatedRoute.snapshot.paramMap.get("id");
+    let productId;
+    if(paramValue!==null){
+     productId = Number(paramValue);
+     this.fetchProduct(productId);
+    }
     console.log("product id =", productId);
 
-    if(productId !== undefined){
-      // fetch product    
-      this.fetchProduct(productId);
-    }
-
-   this.createProductForm();
+    this.createProductForm();
     // fetch suppliers
     this.loadSuppliers();
 
@@ -108,9 +110,12 @@ export class StockProductFormComponent implements OnInit {
   onFileChanged(event:Event){
       //select file
       // .files does not exist on type EventTarget so we typecast to HTMLInputElement 
+      console.log('value of element',this.myInputRef);
+      let lastFileIndex= (event.target as HTMLInputElement).files!.length-1
+      this.selectedFile = (event.target as HTMLInputElement).files![lastFileIndex];
+      console.log('value of element',this.myInputRef.nativeElement.value);
       
-      this.selectedFile = (event.target as HTMLInputElement).files![0];
-      
+      console.log(lastFileIndex);
       this.imageFormData.append('image', this.selectedFile , this.selectedFile.name);
 
       // display image preview
@@ -127,7 +132,7 @@ export class StockProductFormComponent implements OnInit {
     //Gets called when the user clicks on submit to upload the image
   uploadImage(){
     //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
-    
+    console.log(this.imageFormData);
     //Make a call to the Spring Boot Application to save the image
     this.productPhotoService.saveImage(this.imageFormData).subscribe({
       next:(data)=>{
@@ -199,7 +204,7 @@ export class StockProductFormComponent implements OnInit {
     product.price = this.productForm.controls["price"].value;
   
     // add imageUrl from uploaded image
-    product.imageUrl = "http://localhost:8080/api/image/fileSystem/get/"+ this.selectedFile.name;
+    product.imageUrl = this.selectedFile.name;
 
     // add supplier to product
     let supplierId = Number(this.productForm.controls["supplierId"].value);
@@ -230,6 +235,8 @@ export class StockProductFormComponent implements OnInit {
         console.log("Product saved successfully",data);
         alert("Product saved successfully");
         this.url="";
+        this.myInputRef.nativeElement.value ='';
+        this.imageFormData= new FormData();
         this.productForm.reset();
       },
       error:(err)=>{

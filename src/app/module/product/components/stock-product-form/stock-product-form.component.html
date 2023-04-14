@@ -40,7 +40,7 @@
                 <label for="image" >Chosir l'image...</label>
                 <p *ngIf="url"><img [src]="url"  height="200" width="300"></p>
                 <div class="col-sm-6">
-                    <input type="file" (change)="onFileChanged($event)" name="image" id="image" class="inputfile" />
+                    <input type="file" (change)="onFileChanged($event)" name="image" id="image" #imageInput class="inputfile" />
                 </div>
          </div>
          

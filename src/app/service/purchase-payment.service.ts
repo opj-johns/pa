@@ -30,12 +30,11 @@ export class PurchasePaymentService {
 
     let purchase = new Purchase();
     purchase.id = purchaseId;
-
     let payment = new PurchasePayment();
-    payment.amount = amountPaid;
+    payment.amount_paid = amountPaid;
     payment.purchase = purchase;
     payment.paymentType = paymentType;
-
+    console.log(payment);
     return this.httpClient.post<PurchasePayment>(`${this.url}/save`, payment);
 
   }

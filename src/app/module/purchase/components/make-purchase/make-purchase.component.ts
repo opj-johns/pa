@@ -28,15 +28,15 @@ export class MakePurchaseComponent implements OnInit {
               private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    let purchaseId = Number(this.activatedRoute.snapshot.paramMap.get("id"));
-    // research field, while does purchaseId receive zero 0 when there is not route parameter set
-    if(purchaseId!==NaN && purchaseId!== 0){
-      this.purchaseId = purchaseId;
+    let paramValue = this.activatedRoute.snapshot.paramMap.get("id");
+    if(paramValue!==null) {
+      this.purchaseId = Number(paramValue);
       this.getSupplierFromPurchase();
-      console.log("I get an id",purchaseId);
+      console.log("I get an id",this.purchaseId);
     }else{
       this.listenToSelectedSupplier();
     }
+    // research field, while does purchaseId receive zero 0 when there is not route parameter set
     this.listentToDateChanges();
     this.listenToPurchaseDetails();
   }
@@ -92,6 +92,8 @@ export class MakePurchaseComponent implements OnInit {
           purchase: purchase,
           purchaseDetails: this.purchaseDetails
      }
+
+     
 
      this.purchaseService.saveNewPurchase(purchaseWrapper).subscribe({
       next:(purchase)=>{

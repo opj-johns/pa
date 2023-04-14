@@ -27,6 +27,8 @@ export class StockProductTableComponent implements OnInit {
     this.getProducts();
   }
 
+  
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

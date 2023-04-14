@@ -21,12 +21,15 @@ export class PurchasePaymentComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.loadPaymentTypes();
+    console.log(this.data['purchaseId']);
   }
 
   loadPaymentTypes(){
     this.purchasePaymentService.fetchPaymentTypes().subscribe({
       next:(types)=>{
         this.paymentTypes = types;
+        console.table(types);
       },
       error:(err)=>{
         console.log("Failed to fetch types", err);
@@ -64,8 +67,7 @@ export class PurchasePaymentComponent implements OnInit {
 
   
   closeDialog(){
-    this.dialogRef.close({amountPaid:this.amountPaid, 
-                          orderId: this.data.orderId});
+    this.dialogRef.close({amountPaid:this.amountPaid});
   }
 
 

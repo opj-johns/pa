@@ -22,10 +22,12 @@ export class ProductService {
   }
 
   saveProduct(product:Product):Observable<Product>{
+    product.imageUrl=environment.baseUrl+'/api/image/fileSystem/get/'+product.imageUrl;
     return this.httpClient.post<Product>(`${this.url}/save`, product);
   }
 
   updateProduct(product:Product):Observable<Product>{
+    product.imageUrl=environment.baseUrl+'/api/image/fileSystem/get/'+product.imageUrl;
     return this.httpClient.put<Product>(`${this.url}/save`,  product);
   }
 

@@ -64,13 +64,16 @@
                         (click)="onEditPurchase(row.purchaseId)"
                         ></i> 
                     <i  title="payer"  
+                         
                         class="bi bi-currency-dollar text-success actions"
-                        (click)="onPayPurchase(row.puchaseId, row.amountUnpaid)"
+                        (click)="onPayPurchase(row.purchaseId, row.amountUnpaid)"
                         ></i> 
                     <button style="border:none; padding: 0; margin: 0; background-color:transparent;" 
-                            title="générer récu">
-                            
-                            <i class="bi bi-receipt text-success  fs-6" (click)="onShowReceipt(row.purchaseId)"></i>
+                            title="générer récu"
+                            (click)="onShowReceipt(row.purchaseId)"
+                            disabled
+                            >
+                            <i class="bi bi-receipt text-success  fs-6" ></i>
                     </button> 
                   
                   </td>

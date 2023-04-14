@@ -125,6 +125,7 @@ export class PurchaseTableComponent implements OnInit {
 }
 
   onPayPurchase(purchaseId: number, amountUnpaid: number){
+    console.log('purchaseId from puchase table',purchaseId);
     const dialogRef = this.dialog.open(PurchasePaymentComponent,{
       data:{purchaseId: purchaseId, amountUnpaid:amountUnpaid},
       width:"600px",
@@ -134,7 +135,7 @@ export class PurchaseTableComponent implements OnInit {
       next:(data)=>{
         console.log(data);
         if(data!==undefined){
-          this.updatePurchaseTable(data.amountPaid, data.purchaseId);
+          this.updatePurchaseTable(data.amountPaid, purchaseId);
         }
       }
     })
