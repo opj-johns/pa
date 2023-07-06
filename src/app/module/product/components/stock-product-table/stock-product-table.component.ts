@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class StockProductTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['image', 'name', 'category' , 'price', 'qtyInStock', 'actions'];
+  displayedColumns: string[] = ['image', 'name', 'category' , 'price', 'purchasePrice', 'qtyInStock', 'actions'];
   dataSource!: MatTableDataSource<Product>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
@@ -38,6 +38,7 @@ export class StockProductTableComponent implements OnInit {
     }
   } 
 
+  
   getProducts(){
     this.productService.fetchProducts().subscribe({
       next: data =>{

@@ -22,7 +22,9 @@ export class PaymentReceiptComponent implements OnInit {
   ttc: number = 0;
   amountPaid:number=0;
   disableValidate: boolean = true;
-  disablePrint: boolean = true;
+  disablePrintBtn: boolean = true;
+  disableDownloadBtn:boolean = true;
+
   @ViewChild("confirm") confirm!: ElementRef;
   @ViewChild('receipt', { static: true }) receipt: any;
   
@@ -36,7 +38,7 @@ export class PaymentReceiptComponent implements OnInit {
 
   ngOnInit(): void {
       let id = Number(this.activatedRoute.snapshot.paramMap.get('orderId'));
-      if(id !== NaN){
+      if(id){
         console.log("Order id in not NaN ", id);
         this.orderId = id;
       }
@@ -56,6 +58,7 @@ getOrder(){
   this.orderService.getOrder(this.orderId).subscribe({
     next:(data)=>{
        this.order = data;
+       console.log(data);
        this.employeeName = this.order.employee.firstName+" "+this.order.employee.lastName;
        this.clientName = this.order.client.firstName+" "+this.order.client.lastName;
     }
@@ -81,9 +84,10 @@ saveReceipt(){
   
   this.receiptService.save(this.order).subscribe({
     next:(data)=>{
-
+      
        this.toggleEnablePrint();
        console.log("Receipt",data);
+       alert(`Recu sauvegardé avec succès`);
     },
     error:(err)=>{
       console.log("Could not save receitp",err);  
@@ -91,19 +95,23 @@ saveReceipt(){
   })
 }
 
+
 toggleEnablePrint(){
-  this.disablePrint = !this.disablePrint;
+  this.disableDownloadBtn = false;
+  this.disablePrintBtn = false;
+  this.isSaved = true;
 }
 
 
 fetchReceipt(){
-  
   this.receiptService.getReceipt(this.orderId).subscribe({
     next:(resp)=>{
          if(resp!==null){
           this.isSaved = true;
-          this.disablePrint = false;
+          this.disablePrintBtn = false;
+          this.disableDownloadBtn = false;
          }
+         console.log(`Receipt fetched successfully`,resp);
     }
   })
 }
@@ -121,7 +129,6 @@ downloadPage(){
                 this.download(img);
         })
    ).subscribe();
-    
 }
 
 download(file: string){

@@ -49,10 +49,21 @@
     </div>
    </div>
 
+   <div class="mb-3 row">
+    <label for="phone" class="col-sm-2 col-form-label fw-bold form-label" >Role</label>
+    <div class="col-sm-6 mb-2" >
+      <select name="role" id="role" class="form-control" formControlName="role">
+        <option  selected value="EMPLOYEE">EMPLOYEE</option>
+        <option value="ADMIN">ADMIN</option>
+      </select>
+    </div>
+   </div>
+
+
    <input type="number" name="id" hidden formControlName="id">
 
   <div class="btns">
-    <button type="submit" [disabled]="!employeeForm.valid" class="btn btn-primary m-2"><span *ngIf="employeeId===0">Créer</span><span *ngIf="employeeId!==0">Mettre à jour</span></button>
+    <button type="submit" [disabled]="!employeeForm.valid" class="btn btn-primary m-2"><span *ngIf="employeeId===0">Ajouter</span><span *ngIf="employeeId!==0">Modifier</span></button>
     <button type="button" (click)="cancel()" class="btn btn-warning m-2">Annuler</button>
   </div>
 </form>

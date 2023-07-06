@@ -8,37 +8,49 @@
             </div>
             <div class="sidebar-body ">
                 <div class="sidebar-item  ">
-                   <a routerLink="/admin/dashboard" #id1 style="color:green" (click)="onMenuClick(id1)"> <i class="bi bi-speedometer2 "></i>  Tableau de bord</a>
+                   <a routerLink="/admin/dashboard" #id1 style="color:green" (click)="onMenuClick(id1, idI1)"> <i class="bi bi-speedometer2 " #idI1></i>  Tableau de bord</a>
+                </div>
+                
+                <div class="sidebar-item">
+                    <a routerLink="/admin/order/detail" #id3 (click)="onMenuClick(id3 , idI3)">
+                        <i class="bi bi-check2-circle" #idI3></i> Commandes
+                    </a>
                 </div>
                 <div class="sidebar-item">
-                   <a routerLink="/admin/order" #id2 (click)="onMenuClick(id2)" ><i class="bi bi-cart3"></i> Panier </a> 
-                </div>
-                <div class="sidebar-item">
-                    <a routerLink="/admin/order/detail" #id3 (click)="onMenuClick(id3)"><i class="bi bi-check2-circle"></i> Commandes</a>
-                </div>
-                <div class="sidebar-item">
-                   <a  routerLink="/admin/client" #id4 (click)="onMenuClick(id4)"><i class="bi bi-person-circle"></i>  Clients</a>  
+                   <a  routerLink="/admin/client" #id4 (click)="onMenuClick(id4, idI4)"><i class="bi bi-person-circle" #idI4></i>  Clients</a>  
                 </div>
                 <div class="sidebar-item ">
-                    <a routerLink="/admin/product" #id44 (click)="onMenuClick(id44)"><i class="bi bi-capsule"></i> Produits</a>
+                    <a routerLink="/admin/product" #id44 (click)="onMenuClick(id44, id44)">
+                        <i class="bi bi-capsule" #id44></i> Produits
+                    </a>
                 </div>
                 <div class="sidebar-item">
-                   <a routerLink="/admin/supplier" #id5 (click)="onMenuClick(id5)"><i class="bi bi-truck"></i> Fournisseur</a>
+                   <a routerLink="/admin/supplier" #id5  (click)="onMenuClick(id5, idI5)">
+                    <i class="bi bi-truck" #idI5></i> Fournisseur</a>
                 </div>
                 <div class="sidebar-item">
-                    <a routerLink="/admin/employee" #id6 (click)="onMenuClick(id6)"><i class="bi bi-person-video3"></i>  Employees</a>
+                    <a routerLink="/admin/employee" #id6 (click)="onMenuClick(id6, idI6)">
+                        <i class="bi bi-person-video3" #idI6></i>  
+                        Employees
+                    </a>
                 </div>
                 <div class="sidebar-item hidden">
-                    <a routerLink="/admin/purchase/all" #id7 (click)="onMenuClick(id7)"><i class="bi bi-bag-heart"></i>  Achats</a>
+                    <a routerLink="/admin/purchase/all" #id7 (click)="onMenuClick(id7, idI7)">
+                        <i class="bi bi-bag-heart" #idI7></i>  
+                        Achats
+                    </a>
                 </div>
                 <div class="sidebar-item">
-                    <a routerLink="/admin/expense" #id8 (click)="onMenuClick(id8)"><i class="bi bi-cash-coin"></i> Charge</a>
+                    <a routerLink="/admin/expense" #id8 (click)="onMenuClick(id8, idI8)">
+                        <i class="bi bi-cash-coin" #idI8></i> 
+                        Charge
+                    </a>
                 </div>
                 <div class="sidebar-item">
-                    <a routerLink="/admin/settings" #id9 (click)="onMenuClick(id9)"><i class="bi bi-gear"></i> Parametres</a>
+                    <a routerLink="/admin/settings" #id9 (click)="onMenuClick(id9, idI9)"><i class="bi bi-gear" #idI9></i> Parametres</a>
                 </div>
                 <div class="sidebar-item ">
-                    <a href="#" class="text-danger" ><i class="bi bi-box-arrow-left  text-danger"></i> Logout</a>
+                    <a href="#" class="text-danger" (click)="signout()"><i class="bi bi-box-arrow-left  text-danger"></i> Logout</a>
                 </div>
             </div>
         </div>
@@ -47,7 +59,7 @@
             <div class="row p-2  bar">
                 <div class="col-1"><i (click)="closeSidebar()" class="bi bi-list fs-4"></i> </div> 
                 <div class="col text-center pt-1"><p class="">NOTRE <i  class="bi bi-heart-fill "></i> PARAPHARMA</p></div>
-                <div class="col text-center pt-1"><i class="bi bi-person-fill m-2"></i>Hammid</div>
+                <div class="col text-center pt-1"><i class="bi bi-person-fill m-2"></i>{{username}}</div>
             </div>
             <div class="row  ">
                 <div class="col-sm-12 content">

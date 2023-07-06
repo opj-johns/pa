@@ -23,7 +23,7 @@ export class OrderComponent implements OnInit{
 
   ngOnInit(): void {
     let id = Number(this.activatedRoute.snapshot.paramMap.get("id"));
-    if(id!==NaN && id!==0){
+    if(!Number.isNaN(id) && id!==0){
       this.orderId = id;
       console.log("Value of orderId in order component", this.orderId);
     }else{
@@ -62,12 +62,6 @@ export class OrderComponent implements OnInit{
   getProductQuantity(prodsQty: number){
      this.prodsInStock = prodsQty;
   }
-
-
-
-
-
-
 }
 
 

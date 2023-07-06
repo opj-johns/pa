@@ -1,1 +1,74 @@
-<p>purchase-receipt works!</p>
+<div class="wrapper" #receipt>
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row p-2">
+                    <div class="col-sm-4 pt-2 title "> <p class="fs-5">NOTRE <i  class="bi bi-heart-fill text-success "></i> PARAPHARMA</p> </div>
+                    <div class="col-sm-4 pt-2 title"> DATE:  <span>{{stringDate}}</span> </div>
+                    <div class="col-sm-4 pt-2 title"><p> N° RECU: <span class="receiptId"> NP-0{{purchaseId}}</span></p></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <fieldset class="reset">
+                            <legend class="reset">Produits Achètés</legend>
+                            <app-purchased-products-table [purchase-id]="purchaseId" (TTC)="setTTC($event)">
+                            </app-purchased-products-table>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-12">
+                    <fieldset class="reset">
+                        <legend class="reset" >Histoire de Paiements</legend>
+                        <app-purchase-payment-history-table [purchase-id]="purchaseId" (amountPaid)="setAmountPaid($event)">
+                        </app-purchase-payment-history-table>
+                    </fieldset>
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <fieldset class="reset">
+                            <legend class="reset " >Déclaration</legend>
+                            <p>Moi, <span class="text-primary fs-6"> {{supplierName}}</span> en tant que employeur sousigne qué</p>
+                            <p><span class="text-primary fs-6">Company Name</span> à effectué le paiement de <span class="text-success fs-6">{{amountPaid | currency:'USD'}}</span></p>
+                            <p> pour ses produits du prix: <span class="text-success fs-6">{{ttc | currency:'USD'}}</span></p>
+                            <input type="radio" class="me-2" #confirm (change)="onConfirm()">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 mt-2">
+
+                        <button  
+                        *ngIf="!isSaved"
+                        class="me-2"
+                        mat-raised-button
+                        color="accent" 
+                        (click)="saveReceipt()"  
+                        [disabled]="disableValidate">Valider</button>
+
+                        <span  *ngIf="isSaved" class="text-success fs-6 me-2 "   >Sauvgardé  <i class="bi bi-bookmark-check "></i></span>
+
+                        <button mat-raised-button 
+                        color="primary" 
+                        class="me-2" 
+                        [disabled]="disablePrintBtn" 
+                        class="mat-raised button"
+                        (click)="printPage()">Imprimer<i class="bi p-1 bi-printer-fill "></i></button>
+                          &nbsp;&nbsp;
+                        <button mat-raised-button 
+                        color="primary" 
+                        [disabled]="disableDownloadBtn" 
+                        class="me-2"
+                        (click)="downloadPage()">Téléchargé <i class="bi  p-1 bi-cloud-download"></i></button>
+
+                        
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+       
+    </div>
+</div>

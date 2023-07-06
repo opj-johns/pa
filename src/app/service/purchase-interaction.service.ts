@@ -30,7 +30,8 @@ export class PurchaseInteractionService {
 
   addNewPurchaseDetail(purchaseDetail: PurchaseDetail){
     this.purchaseDetails.push(purchaseDetail);
-
+    console.log('addNewPurchaseDetail', purchaseDetail);
+    console.log('purchase details state after adding new detail', this.purchaseDetails);
     this.totalPurchaseAmount += purchaseDetail.purchasePrice * purchaseDetail.quantity;
     this.totalQuantity += purchaseDetail.quantity;
 
@@ -38,31 +39,26 @@ export class PurchaseInteractionService {
     this.totalQuantitySubject.next(this.totalQuantity);
     this.purchaseDetailsSubject.next(this.purchaseDetails);
     this.newProductSubject.next(purchaseDetail.product);
-    
   }
 
-  editPurchaseDetail(productId:number, detail:Detail){
-      let index = this.purchaseDetails.findIndex(purchaseDetail=> purchaseDetail.product.id === productId);
+  editPurchaseDetail(product:Product, detail:Detail){
+      let index = this.purchaseDetails.findIndex(purchaseDetail=> purchaseDetail.product.id === product.id);
       
       if(index>-1){
-        
+        console.log(`PurchaseDetail is edited!! `);
         this.totalPurchaseAmount -= this.purchaseDetails[index].purchasePrice * this.purchaseDetails[index].quantity;
         this.totalQuantity -= this.purchaseDetails[index].quantity;
 
-        this.purchaseDetails[index].product.price = detail.sellingPrice;
-        
-        this.purchaseDetails[index].purchasePrice = detail.purchasePrice;
-        this.purchaseDetails[index].sellingPrice = detail.sellingPrice;
-
-
-        this.totalPurchaseAmount += detail.purchasePrice * detail.quantity;
+        this.purchaseDetails[index].quantity = detail.quantity;
+        this.totalPurchaseAmount 
+              += product.purchasePrice * detail.quantity;
         this.totalQuantity += detail.quantity;
 
         this.purchaseDetailsSubject.next(this.purchaseDetails);
         this.totalPurchaseAmountSubject.next(this.totalPurchaseAmount);
         this.totalQuantitySubject.next(this.totalQuantity);
-
-
+      }else{
+        alert(`editPurchaseDetail could not fint detail`);
       }
   }
 
@@ -97,7 +93,6 @@ export class PurchaseInteractionService {
       detail.quantity = purchaseDetail.quantity;
     }
     return detail;
-
   }
   
 

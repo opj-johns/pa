@@ -50,13 +50,13 @@
                         <button mat-raised-button 
                         color="primary" 
                         class="me-2" 
-                        [disabled]="disablePrint || !isSaved" 
+                        [disabled]="disablePrintBtn" 
                         class="mat-raised button"
                         (click)="printPage()">Imprimer<i class="bi p-1 bi-printer-fill "></i></button>
                           &nbsp;&nbsp;
                         <button mat-raised-button 
                         color="primary" 
-                        [disabled]="disablePrint || !isSaved" 
+                        [disabled]="disableDownloadBtn" 
                         class="me-2"
                         (click)="downloadPage()">Téléchargé <i class="bi  p-1 bi-cloud-download"></i></button>
 

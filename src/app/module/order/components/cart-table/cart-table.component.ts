@@ -13,6 +13,7 @@ import { ClientService } from 'src/app/service/client.service';
 import { EmployeeService } from 'src/app/service/empolyee.service';
 import { OrderDetailService } from 'src/app/service/order-detail.service';
 import { OrderService } from 'src/app/service/order.service';
+import { PurchaseInteractionService } from 'src/app/service/purchase-interaction.service';
 
 
 
@@ -59,13 +60,11 @@ export class CartTableComponent implements OnInit, AfterViewInit{
               private orderService: OrderService,
               private orderDetailService:OrderDetailService,
               private router: Router,
-              private clientService: ClientService) { 
+              private clientService: ClientService, 
+              private purchaseInterService: PurchaseInteractionService) { 
      this.listenForProducts();
      this.dataSource = new MatTableDataSource(this.cartProducts);
   }
-
- 
- 
 
   ngOnInit(): void {
     
@@ -95,6 +94,16 @@ export class CartTableComponent implements OnInit, AfterViewInit{
       error:(error)=>{console.log('error receiving multicasted product from cart service', error)}
     })
   }
+
+  listenToSelectedSupplier(){
+    this.purchaseInterService.selectedSupplierSubject.subscribe({
+      next:(supplier)=>{
+        // this.supplier = supplier;
+        console.log("Supplier selected:", supplier.name);
+      }
+    })
+  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

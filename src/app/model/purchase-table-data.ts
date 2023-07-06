@@ -7,6 +7,10 @@ export class PurchaseTableData{
     ttc!:number;
     amountPaid!:number;
     amountUnpaid!:number;
+    purchaseCost!:number;
+    disableReceiptButton!:boolean;
+    disableUpdateButton!: boolean;
+    disablePaymentButton!: boolean;
 }
 
 /*

@@ -23,7 +23,7 @@ interface Car {
 export class SupplierSelectComponent implements OnInit {
   suppliers!: Supplier[];
   selectedSupplierId!: number;
-  @Input()supplierName: string="";
+  supplierName: string="";
   supplierExists: boolean = true;
 
   constructor(private supplierService: SupplierService, 
@@ -46,9 +46,6 @@ export class SupplierSelectComponent implements OnInit {
   }
 
   updateSelectedSupplier(){
-
-
-    
     if(this.selectedSupplierId!==undefined){
       let selectedSupplier =   this.suppliers.find(supplier=>{
         return supplier.id  === this.selectedSupplierId;
@@ -58,15 +55,9 @@ export class SupplierSelectComponent implements OnInit {
       }else{
         console.log("Could not find supplier in suppliers table");
       }
-      
     }else{
       console.log("selected supplier id is undefined in supplier select component");
     }
-    
     console.log("I am alive" ,this.selectedSupplierId );
   }
-
-
-
-
 }

@@ -8,6 +8,7 @@ import { Detail, PurchaseDetail } from 'src/app/model/purchase-detail';
 import { ProductService } from 'src/app/service/product.service';
 import { PurchaseInteractionService } from 'src/app/service/purchase-interaction.service';
 import { PurchaseDetailDialogComponent } from '../purchase-detail-dialog/purchase-detail-dialog.component';
+import { Supplier } from 'src/app/model/supplier';
 
 
 
@@ -36,6 +37,7 @@ export class SupplierProductTableComponent implements OnInit{
   ngOnInit(): void {
     this.getProducts();
     this.enableProductPurchase();
+    this.listenToSelectedSupplier();
   }
 
   applyFilter(event: Event) {
@@ -55,12 +57,20 @@ export class SupplierProductTableComponent implements OnInit{
         this.initializeIsActivatedProducts();
 
         console.log(data);
-
-        
+             
+        this.displayProductsInTable([]);
 
        
-          this.dataSource = new MatTableDataSource(this.products);
-          console.log(this.products);
+      },
+      error: error=>{
+        console.log( `Error fetching products`, error);
+      }
+    })
+  }
+
+  displayProductsInTable(products: Product[]): void {
+      this.dataSource = new MatTableDataSource(products);
+          console.log(products);
           // -----------------------------
           if(this.dataSource !== undefined && this.paginator !== undefined ){
 
@@ -71,13 +81,6 @@ export class SupplierProductTableComponent implements OnInit{
             this.dataSource.sort = this.sort;
       
           }else{ console.log('undefined datasource') }
-
-       
-      },
-      error: error=>{
-        console.log( `Error fetching products`, error);
-      }
-    })
   }
 
   takePurchaseDetails(product: Product, index: number){
@@ -85,9 +88,17 @@ export class SupplierProductTableComponent implements OnInit{
     let productIndex = this.products.findIndex(p=> p.id === product.id);
     console.log("Product index: ", productIndex);
 
+    let details = new Detail();
+    details.sellingPrice = product.price;
+    details.purchasePrice = product.purchasePrice;
+    details.quantity = 0; 
+    details.isSupplierProductTableCall = true;
+    details.oldStockQuantity = product.qtyInStock;
+
    let dialogRef =   this.matDialog.open(PurchaseDetailDialogComponent, {
-      width:"690px",
-      })
+      data:{ ...details },
+       width:"690px",
+      });
 
     dialogRef.afterClosed().subscribe({
       next:(detail)=>{
@@ -95,7 +106,6 @@ export class SupplierProductTableComponent implements OnInit{
           // functionality to disable and enable add buttons
           this.disableAddButton[index]=true;
           this.disabledProductsMap.set(product.id, index);
-
           console.log("received detail", detail);
           this.forwardPurchase(detail, product);
         }
@@ -106,10 +116,9 @@ export class SupplierProductTableComponent implements OnInit{
   forwardPurchase(detail: Detail, product: Product){
    // prepare purchase detail object
     let purchaseDetail = new PurchaseDetail();
-    product.price = detail.sellingPrice;
     purchaseDetail.product = product;
-    purchaseDetail.purchasePrice = detail.purchasePrice;
-    purchaseDetail.sellingPrice = detail.sellingPrice;
+    purchaseDetail.purchasePrice = product.purchasePrice;
+    purchaseDetail.sellingPrice = product.price;
     purchaseDetail.quantity = detail.quantity;
     
 
@@ -123,7 +132,6 @@ export class SupplierProductTableComponent implements OnInit{
   initializeIsActivatedProducts(){
     for(let i=0; i<this.products.length; i++){
         this.disableAddButton[i]=false;
-        
     }
   }
 
@@ -139,4 +147,23 @@ export class SupplierProductTableComponent implements OnInit{
     })
   }
 
-}
+  listenToSelectedSupplier(){
+    this.purchaseInterService.selectedSupplierSubject.subscribe({
+      next:(supplier)=>{
+        // this.supplier = supplier;
+        console.log("Supplier selected: displayed in supplier product table component", supplier);
+        const filteredProducts= this.getProductsBySupplier(supplier);
+        this.displayProductsInTable(filteredProducts);
+      }
+    })
+   }
+
+   
+  getProductsBySupplier(supplier: Supplier){
+    return this.products
+    .filter(_ => _.supplier.id === supplier.id);
+  }    
+  }
+
+
+

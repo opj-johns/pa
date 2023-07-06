@@ -7,7 +7,6 @@ import { SettingsComponent } from "src/app/component/admin/settings/settings.com
 const routes:Routes=[
     {path:'', component: AdminHomeComponent, children:[
         {path: 'dashboard', component: DashboardComponent},
-        
         {path:'order', loadChildren:()=> import('./../order/order.module').then(m=>m.OrderModule)},
         {path:'client', loadChildren:()=> import('./../client/client.module').then(m=>m.ClientModule)},
         {path:'product', loadChildren:()=> import('./../product/product.module').then(m=>m.ProductModule)},
@@ -16,7 +15,7 @@ const routes:Routes=[
         {path:'purchase', loadChildren:()=> import('./../purchase/purchase.module').then(m=>m.PurchaseModule)},
         {path:'expense', loadChildren:()=> import('./../expense/expense.module').then(m=>m.ExpenseModule)},
         {path:'settings', component: SettingsComponent}, 
-        
+        {path: '', component: DashboardComponent},
     ]}
 ]
 

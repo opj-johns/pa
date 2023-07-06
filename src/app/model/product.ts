@@ -8,11 +8,11 @@ export class Product{
     qtyInStock!: number;
     imageUrl!: string;
     price!:number;
-    
+    purchasePrice!: number;
     category!: Category;
     supplier!: Supplier;
 }
-
+ 
 
 
 

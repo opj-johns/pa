@@ -42,13 +42,19 @@
               
                   <!-- Price Column -->
                   <ng-container matColumnDef="price">
-                    <th style="width:10%" mat-header-cell *matHeaderCellDef mat-sort-header> Prix </th>
+                    <th style="width:10%" mat-header-cell *matHeaderCellDef mat-sort-header>Prix vent</th>
                     <td style="width:10%" mat-cell *matCellDef="let row"> {{row.price | currency: 'USD'}}</td>
+                  </ng-container>
+
+                  <!-- Price Column -->
+                  <ng-container matColumnDef="purchasePrice">
+                    <th style="width:10%" mat-header-cell *matHeaderCellDef mat-sort-header> Prix achat</th>
+                    <td style="width:10%" mat-cell *matCellDef="let row"> {{row.purchasePrice | currency: 'USD'}}</td>
                   </ng-container>
               
                   <!-- Qty in stock Column -->
                   <ng-container matColumnDef="qtyInStock">
-                    <th  style="width:5%" mat-header-cell *matHeaderCellDef mat-sort-header> Quantité en Stock </th>
+                    <th  style="width:5%" mat-header-cell *matHeaderCellDef mat-sort-header> Qté en Stock </th>
                     <td style="width:5%"  mat-cell *matCellDef="let row"> {{row.qtyInStock }} </td>
                   </ng-container>
               

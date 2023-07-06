@@ -15,7 +15,6 @@ import { OrderedProducsDialogComponent } from './components/ordered-producs-dial
 import { OrderedProductsTableComponent } from './components/ordered-products-table/ordered-products-table.component';
 import { PaymentReceiptComponent } from './components/payment-receipt/payment-receipt.component';
 
-
 @NgModule({
   declarations: [
     OrderComponent,

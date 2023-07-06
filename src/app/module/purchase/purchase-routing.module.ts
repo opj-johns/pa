@@ -8,7 +8,7 @@ const routes: Routes = [
   {path:'all', component: PurchaseComponent},
   {path:'new', component: MakePurchaseComponent,},
   {path:':id', component: MakePurchaseComponent,},
-  {path:'payment-receipt/:id', component: PurchaseReceiptComponent},
+  {path:'payment-receipt/:purchaseId', component: PurchaseReceiptComponent},
 ];
 
 @NgModule({

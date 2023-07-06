@@ -18,17 +18,17 @@ export class ExpenseSalesChartComponent implements OnInit {
     this.chartOptions = {
   chart: {
     type: 'spline',
-    backgroundColor: '#181D2E',
+    backgroundColor: '#E8ECD6',
     borderRadius: 5,
     borderWidth: 2,
-    borderColor:'#008000',
+    borderColor:'#FDFFF0',
     height:300
   },
  
   title: {
     text: 'GHARGE vs VENTS',
     style:{
-        color: 'white',
+        color: '#D74152',
          fontSize: 20,
     }
   },
@@ -38,7 +38,7 @@ export class ExpenseSalesChartComponent implements OnInit {
       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     labels:{
       style:{
-         color: 'white',
+         color: '#D74152',
          fontSize: 13,
       }
     }
@@ -47,7 +47,7 @@ export class ExpenseSalesChartComponent implements OnInit {
     title: {
       text: 'Montant en USD',
           style:{
-            color:"white",
+            color:"#D74152",
             fontSize: "15px",
             fontStyle: "Verdana"
          },
@@ -55,7 +55,7 @@ export class ExpenseSalesChartComponent implements OnInit {
     },
      labels:{
       style:{
-         color: 'white',
+         color: '#D74152',
          fontSize: 13,
       }
     }
@@ -68,7 +68,7 @@ export class ExpenseSalesChartComponent implements OnInit {
     spline: {
       marker: {
         radius: 4,
-        lineColor: '#666666',
+        lineColor: '#FDFFF0',
         lineWidth: 1
       },
       // color:'blue',
@@ -89,7 +89,7 @@ export class ExpenseSalesChartComponent implements OnInit {
      {
         type:'spline',
         name: 'Vents',
-        color: 'green',
+        color: '#D74152',
         
         marker: {
           symbol: 'diamond'

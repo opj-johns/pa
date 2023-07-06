@@ -17,6 +17,8 @@ import { PurchasePaymentComponent } from './component/purchase-payment/purchase-
 
 import { PurchasePaymentHistoryDialogComponent } from './component/purchase-payment-history-dialog/purchase-payment-history-dialog.component';
 import { PurchaseReceiptComponent } from './components/purchase-receipt/purchase-receipt.component';
+import { PurchasedProductsTableComponent } from './components/purchased-products-table/purchased-products-table.component';
+import { PurchasePaymentHistoryTableComponent } from './components/purchase-payment-history-table/purchase-payment-history-table.component';
 
 
 
@@ -35,6 +37,8 @@ import { PurchaseReceiptComponent } from './components/purchase-receipt/purchase
     PurchasePaymentComponent,
     PurchasePaymentHistoryDialogComponent,
     PurchaseReceiptComponent,
+    PurchasedProductsTableComponent,
+    PurchasePaymentHistoryTableComponent,
   ],
   imports: [
     BaseModule,

@@ -17,6 +17,7 @@ export class PurchaseDetailDialogComponent implements OnInit {
   purchasePrice!: number;
   sellingPrice!: number;
   quantity!:number;
+  oldStockQuantity!: number;
   isSupplierTableCall!: boolean;
   ttc: number = 0;
 
@@ -24,7 +25,7 @@ export class PurchaseDetailDialogComponent implements OnInit {
   private dialogRef: MatDialogRef<PurchaseDetailDialogComponent>) { }
 
   ngOnInit(): void {
-    if(this.data == undefined){
+    if(this.data !== undefined && this.data.isSupplierProductTableCall){
       // supplier product table component called this
       this.isSupplierTableCall = true;
       console.log("purchase detail dialog called from supplier table component");
@@ -33,11 +34,15 @@ export class PurchaseDetailDialogComponent implements OnInit {
       // purchase cart table component called this
       console.log("purchase detail dialog called from purchase cart table component with data", this.data);
       this.isSupplierTableCall = false;
-      this.setDetails();
     }
+    this.setDetails();
   }
 
-  closeDialog(){
+  closeDialog(detail: Detail){
+    this.dialogRef.close(detail);
+  }
+
+  closeDialogV1(){
     this.dialogRef.close();
   }
 
@@ -46,11 +51,9 @@ export class PurchaseDetailDialogComponent implements OnInit {
     if(this.purchaseDetailForm!==undefined){
 
       let detail: Detail = new Detail();
-      detail.purchasePrice = this.purchaseDetailForm.controls["purchasePrice"].value;
-      detail.sellingPrice = this.purchaseDetailForm.controls["sellingPrice"].value;
       detail.quantity = this.purchaseDetailForm.controls["quantity"].value;
       console.log("Detail",detail);
-      this.dialogRef.close(detail);
+      this.closeDialog(detail);
     }
   }
 
@@ -58,6 +61,7 @@ export class PurchaseDetailDialogComponent implements OnInit {
     this.purchasePrice = this.data.purchasePrice;
     this.sellingPrice = this.data.sellingPrice;
     this.quantity = this.data.quantity;
+    this.oldStockQuantity = this.data.oldStockQuantity;
   }
   
 

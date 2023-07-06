@@ -18,9 +18,7 @@ export class PurchasePaymentService {
   fetchDialogPaymentData(purchaseId:number):Observable<PaymentDialogData[]>{
     let purchase = new Purchase();
     purchase.id = purchaseId;
-    
     return this.httpClient.post<PaymentDialogData[]>(`${this.url}/dialog-data`, purchase);
-    
   }
 
   makePayment(amountPaid:number, paymentTypeId:number, purchaseId:number):Observable<PurchasePayment>{
@@ -28,14 +26,14 @@ export class PurchasePaymentService {
     let paymentType = new PaymentType();
     paymentType.id = paymentTypeId;
 
-    let purchase = new Purchase();
-    purchase.id = purchaseId;
-    let payment = new PurchasePayment();
-    payment.amount_paid = amountPaid;
-    payment.purchase = purchase;
-    payment.paymentType = paymentType;
-    console.log(payment);
-    return this.httpClient.post<PurchasePayment>(`${this.url}/save`, payment);
+    let purchase = new Purchase(); 
+    purchase.id = purchaseId; 
+    let payment = new PurchasePayment(); 
+    payment.amount_paid = amountPaid; 
+    payment.purchase = purchase; 
+    payment.paymentType = paymentType;  
+    console.log(payment);  
+    return this.httpClient.post<PurchasePayment>(`${this.url}/save`, payment); 
 
   }
 

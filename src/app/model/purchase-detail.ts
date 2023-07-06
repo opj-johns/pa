@@ -14,4 +14,6 @@ export class Detail{
     purchasePrice!: number;
     sellingPrice!:number;
     quantity!:number;
+    oldStockQuantity!:number;
+    isSupplierProductTableCall!:boolean;
 }

@@ -25,7 +25,7 @@ export class StockProductFormComponent implements OnInit {
   retrieveResonse: any;
   message!: string;
   imageName: any;
-
+   
   
 
 
@@ -73,8 +73,6 @@ export class StockProductFormComponent implements OnInit {
         this.oldProduct = data;
         console.log("Fetched product",data);
         this.updateProductForm(data);
-        
-       
       },
       error:(err)=>{
         console.log("error fecting product ", err);
@@ -87,7 +85,7 @@ export class StockProductFormComponent implements OnInit {
       id:new FormControl(product.id),
       name: new FormControl(product.name, [Validators.required, Validators.minLength(2)]),
       description: new FormControl(product.description, [Validators.required, Validators.minLength(5)]),
-      price: new FormControl(product.price, [Validators.required, Validators.min(10)]),
+      purchasePrice: new FormControl(product.price, [Validators.required, Validators.min(10)]),
       categoryId: new FormControl("", [Validators.required]),
       supplierId: new FormControl("", [Validators.required])
     })   
@@ -100,7 +98,7 @@ export class StockProductFormComponent implements OnInit {
       id:new FormControl(""),
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       description: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      price: new FormControl('', [Validators.required, Validators.min(10)]),
+      purchasePrice: new FormControl('', [Validators.required, Validators.min(10)]),
       categoryId: new FormControl('', [Validators.required]),
       supplierId: new FormControl('', [Validators.required])
     })
@@ -194,14 +192,17 @@ export class StockProductFormComponent implements OnInit {
 
   prepareNewProduct(){
     //  alert("Submit button clicked");
-   
+   const PROFIT_RATIO = 1.33333333;
+   const DEFAULT_STOCK_QTY = 0;
     let product = new Product();
     if(this.oldProduct){
       product.id = this.oldProduct.id;
     }
     product.description = this.productForm.controls["description"].value;
     product.name = this.productForm.controls["name"].value;
-    product.price = this.productForm.controls["price"].value;
+    product.purchasePrice = this.productForm.controls["purchasePrice"].value;
+    product.qtyInStock = DEFAULT_STOCK_QTY;
+    product.price = product.purchasePrice * PROFIT_RATIO;
   
     // add imageUrl from uploaded image
     product.imageUrl = this.selectedFile.name;

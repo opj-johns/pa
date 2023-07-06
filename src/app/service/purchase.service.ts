@@ -41,6 +41,11 @@ export class PurchaseService {
     purchase.id = purchaseId;
     return this.httpClient.post<Supplier>(`${this.url}/get-supplier`, purchase);
   }
+
+
+  getPurchase(pucrhaseId: number):Observable<Purchase>{
+    return this.httpClient.get<Purchase>(`${this.url}/${pucrhaseId}`);
+  }
  
 
 }

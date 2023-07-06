@@ -54,7 +54,7 @@ export class CommandTableComponent implements OnInit{
       this.orderService.fetchCommands().subscribe({
         next:(data)=>{
           this.commands = data;
-
+          console.log(this.commands);
           for(let i=0; i<this.commands.length; i++){
           this.commands[i].date = this.commands[i].date.split("T")[0];
           } 

@@ -27,6 +27,7 @@ export class PurchaseTableComponent implements OnInit {
                                 'amountUnpaid','actions'];
   dataSource!: MatTableDataSource<PurchaseTableData>;
   deletedPurchaseId!: number;
+  disableReceiptButton = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -79,9 +80,7 @@ export class PurchaseTableComponent implements OnInit {
       width:"750px"
     });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(`Dialog result: ${result}`);
-    // });
+  
       console.log(purchaseId);
   }
 
@@ -108,7 +107,7 @@ export class PurchaseTableComponent implements OnInit {
        }
      })
     }
- }
+  }
 
  
  updatePurchaseTableByPurchase(){
@@ -120,15 +119,20 @@ export class PurchaseTableComponent implements OnInit {
     console.log("Sliced purchase: ",this.purchases.splice(index,1)); 
 
     this.dataSource = new MatTableDataSource(this.purchases);
-  }
-
+    }
 }
 
   onPayPurchase(purchaseId: number, amountUnpaid: number){
     console.log('purchaseId from puchase table',purchaseId);
-    const dialogRef = this.dialog.open(PurchasePaymentComponent,{
-      data:{purchaseId: purchaseId, amountUnpaid:amountUnpaid},
-      width:"600px",
+    const dialogRef = this
+          .dialog
+          .open(
+            PurchasePaymentComponent,{
+             data:{
+                    purchaseId: purchaseId, 
+                    amountUnpaid:amountUnpaid
+                  },
+            width:"600px",
     });
     
     dialogRef.afterClosed().subscribe({
@@ -142,8 +146,6 @@ export class PurchaseTableComponent implements OnInit {
   }
 
   updatePurchaseTable(amountPaid:number, purchaseId:number){
-    
-    
     let pIndex = this.purchases.findIndex(purchase=>{
       return purchase.purchaseId === purchaseId;
     })
@@ -151,8 +153,31 @@ export class PurchaseTableComponent implements OnInit {
     if(pIndex>-1){
       this.purchases[pIndex].amountPaid += amountPaid;
       this.purchases[pIndex].amountUnpaid -= amountPaid;
-    }
 
+      let purchaseCost = 0;
+      let totalAmountPaid = 0
+
+      totalAmountPaid = this.purchases[pIndex].amountPaid;
+      purchaseCost = this.purchases[pIndex].purchaseCost;
+
+      let purchaseStatus = this.
+      getPurchaseStatus(totalAmountPaid, purchaseCost);
+
+      this.purchases[pIndex].status = purchaseStatus;
+
+    }else{
+      alert("Could not find purchase table item by purchaseId");
+    }
+  }
+
+   getPurchaseStatus(totalAmountPaid:number, purchaseCost:number):string{
+    if(totalAmountPaid<=0){
+      return `initié`;
+    }
+    if(totalAmountPaid>0 && totalAmountPaid<purchaseCost) {
+      return `Paiement`;
+    }
+   return `Complété`;
   }
   
   onEditPurchase(purchaseId:number){

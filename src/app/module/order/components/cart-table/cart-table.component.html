@@ -91,53 +91,47 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
+               </ng-template>
+
+               <ng-template [ngIf]="!showRealSelect">
+
+                <div class="col-sm-7 mt-4" >
+                    <mat-form-field class="example-full-width " appearance="fill" >
+                             <mat-label class="text-primary">Employee/Utilisateur</mat-label>
+                             <input type="email" class="fs-6 fw-bold text-success" matInput [value]="selectedEmployeeName" disabled="true">
+                    </mat-form-field>
+                
+                </div>
+              </ng-template>
+
+              <!--  validation button -->
+              <ng-template [ngIf]="showRealSelect">
+                <div class="col-sm" >
+                  <button type="button"  
+                          [disabled]="!(selectedProductIds.length>0 && selectedEmployeeId!==0 && selectedClientId!==0)" 
+                          mat-raised-button color="accent" class="mt-4"
+                          (click)="onValidate()">
+                          Valider
+                  </button>
+                </div>
+              </ng-template>
+
+              <ng-template  [ngIf]="!showRealSelect">
+
+                <div class="col-sm"  >
+                  <button type="button"  
+                          [disabled]="!(selectedProductIds.length>0) " 
+                          mat-raised-button color="accent" class="mt-4"
+                          (click)="onUpdate()">
+                          Metter à jour
+                  </button>
+                </div>
               </ng-template>
             </form>
 
-                <ng-template [ngIf]="!showRealSelect">
-
-                  <div class="col-sm-7 mt-4" >
-                      <mat-form-field class="example-full-width " appearance="fill" >
-                               <mat-label class="text-primary">Employee/Utilisateur</mat-label>
-                               <input type="email" class="fs-6 fw-bold text-success" matInput [value]="selectedEmployeeName" disabled="true">
-                      </mat-form-field>
-                  
-                  </div>
-                </ng-template>
-
-                <!--  validation button -->
-                <ng-template [ngIf]="showRealSelect">
-
-                  <div class="col-sm" >
-                    <button type="button"  
-                            [disabled]="!(selectedProductIds.length>0 && selectedEmployeeId!==0 && selectedClientId!==0)" 
-                            mat-raised-button color="accent" class="mt-4"
-                            (click)="onValidate()">
-                            Valider
-                    </button>
-                  </div>
-                </ng-template>
-                <ng-template  [ngIf]="!showRealSelect">
-
-                  <div class="col-sm"  >
-                    <button type="button"  
-                            [disabled]="!(selectedProductIds.length>0) " 
-                            mat-raised-button color="accent" class="mt-4"
-                            (click)="onUpdate()">
-                            Metter à jour
-                    </button>
-                  </div>
-                </ng-template>
+                
            </div>
                   
                 </div>
-
-             
-             <!-- <div class="row" >
-                
-
-            
-             
-        </div> -->
     </div>
  </div>

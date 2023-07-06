@@ -4,20 +4,20 @@
 
      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" >
         <input type="number" name="id" formControlName="id" hidden>
-        <div class="row mb-5 text-center">
+        <div class="row mb-2 text-center">
             <label for="" class="col-sm-2 col-form-label form-label ">Libéllé</label>
                     <div class="col-sm-6 ">
                         <input type="text" class="form-control" formControlName="name">
                     </div>
         </div>
-        <div class="row  mb-5">
-            <label for="" class="col-sm-2 col-form-label form-label ">Prix de vente</label>
+        <div class="row  mb-2">
+            <label for="" class="col-sm-2 col-form-label form-label ">Prix d`achat</label>
             <div class="col-sm-6">
-                <input type="number" class="form-control" formControlName="price">
+                <input type="number" class="form-control" formControlName="purchasePrice">
             </div>
         </div>
         
-        <div class="row mb-5">
+        <div class="row mb-2">
             <label for="catgory" class="col-sm-2 col-form-label form-label ">Catégory</label>
             <div class="col-sm-6">
             <select name="catgory" id="catgory" class="form-select" formControlName="categoryId">
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="row mb-5">
+        <div class="row mb-2">
             <label for="supplier" class="col-sm-2 col-form-label form-label ">Fournisseur</label>
             <div class="col-sm-6">
                 <select name="supplier" id="supplier" class="form-select" formControlName="supplierId">
@@ -57,7 +57,7 @@
          </div>
          <div class="row text-center">
             <div class="col-1 ">
-                <button class="btn btn-success "[disabled]="!(productForm.valid&&selectedFile)" type="submit">Envoyer</button>
+                <button class="btn btn-success "[disabled]="!(productForm.valid&&selectedFile)" type="submit">Ajouter</button>
             </div>
          </div>
          

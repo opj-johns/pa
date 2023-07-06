@@ -29,13 +29,16 @@ export class PurchaseCartTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor(private purchaseInterService: PurchaseInteractionService, private matDialog: MatDialog) { 
+  constructor(
+    private purchaseInterService:PurchaseInteractionService, 
+    private matDialog: MatDialog) { 
      
   }
 
   ngOnInit(): void {
     this.newProductAdded();
     this.emptyProductsTable();
+    this.listenToSelectedSupplier();
   }
   ngAfterViewInit():void{
    
@@ -50,29 +53,43 @@ export class PurchaseCartTableComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onDelete(productId: number){
+  listenToSelectedSupplier(){
+    console.log("listenToSelectedSupplier");
+    this.purchaseInterService.selectedSupplierSubject.subscribe({
+      next:(supplier)=>{
+        // this.supplier = supplier;
+        console.log(`I have ears`);
+        this.purchaseInterService.resetPurchaseCartProductTable();
+      }
+    })
+  }
+
+  onDelete(product: Product){
      
-      let index = this.products.findIndex(p=> p.id === productId);
+      let index = this.products.findIndex(p=> p.id === product.id);
       if(index>-1){
         this.products.splice(index,1);
         this.dataSource = new MatTableDataSource(this.products);
-        this.purchaseInterService.enableProductPurchase(productId);
+        this.purchaseInterService.enableProductPurchase(product.id);
       }
      
-      this.purchaseInterService.deletePurchaseDetail(productId);
+      this.purchaseInterService.deletePurchaseDetail(product.id);
   }
 
-  onEdit(productId: number){
-    let detail = this.purchaseInterService.getDetail(productId);
+  onEdit(product: Product){
+    console.log(`test product`,product);
+    let detail = this.purchaseInterService.getDetail(product.id);
     let dialogRef = this.matDialog.open(PurchaseDetailDialogComponent, {
-      data: detail,
+      data:{ ...detail, isSupplierProductTableCall:false, oldStockQuantity: product.qtyInStock },
       width: '690px'
     })
     
     dialogRef.afterClosed().subscribe({
       next:(detail:Detail)=>{
       if(detail!==undefined){
-        this.purchaseInterService.editPurchaseDetail(productId, detail);
+        console.log(`Dialog closed from purchase cart!!`);
+        this.purchaseInterService
+          .editPurchaseDetail(product, detail);
       }
       }
     })
@@ -107,7 +124,6 @@ export class PurchaseCartTableComponent implements OnInit, AfterViewInit {
       }
     })
   }
-
 }
 
 

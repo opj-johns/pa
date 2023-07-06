@@ -18,7 +18,7 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
         <td mat-cell *matCellDef="let row"> 
-          <i class="bi bi-trash m-2" (click)="onDelete(row.id)" ></i>  <i class="bi bi-pencil" (click)="onEdit(row.id)"></i>  </td>
+          <i class="bi bi-trash m-2" (click)="onDelete(row)" ></i>  <i class="bi bi-pencil" (click)="onEdit(row)"></i>  </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

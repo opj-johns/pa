@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row text-center fs-3">
-    <a routerLink="/admin/order"><i  class="bi bi-plus-circle-fill text-success"></i></a>
-   
+    <a routerLink="/admin/order">
+      <i  class="bi bi-plus-circle-fill text-success"></i>
+    </a>
 </div>
     <div class="row" *ngIf="!commands">
       <p class="text-center fs-5 text-success pt-2">Loading order details...</p>
@@ -69,19 +70,27 @@
                   <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
                     <td mat-cell *matCellDef="let row"> 
-                      <i (click)="onDelete(row.orderId)" title="supprimer" class="bi bi-trash text-danger actiopns"></i> 
-                      <i  (click)="onMakeOrder(row.orderId)" title="ajouter des produits" class="bi bi-plus-circle text-success actions"></i> 
+                      <button  (click)="onDelete(row.orderId)" title="supprimer" style="border:none; padding: 0; margin: 0; background-color:transparent;">
+                        <i class="bi bi-trash text-danger actiopns"></i>
+                      </button>
+                       
                       
+                      <button (click)="onMakeOrder(row.orderId)" 
+                      title="ajouter des produits"
+                      [disabled]="row.amountPaid>0"
+                      style="border:none; padding: 0; margin: 0; background-color:transparent;">
+                        <i class="bi bi-plus-circle text-success actions" ></i> 
+                      </button>
 
                           <button style="border:none; padding: 0; margin: 0; background-color:transparent;" 
-                                  [disabled]="row.amountPaid===row.ttc"
+                                  [disabled]="row.amountPaid>=row.ttc"
                                   title="payer" 
                                   (click)="onPayOrder(row.orderId, row.amountUnpaid)">
                                   <i class="bi bi-currency-dollar text-success fs-6"></i> 
                           </button>
 
                       <button style="border:none; padding: 0; margin: 0; background-color:transparent;" 
-                              [disabled]="row.amountPaid!==row.ttc" 
+                              [disabled]="!(row.amountUnpaid<=0.00)" 
                               (click)="onShowReceipt(row.orderId)" 
                               title="générer récu">
                               <i class="bi bi-receipt text-success  fs-6"></i>

@@ -15,7 +15,6 @@ import { environment } from 'src/environments/environment';
 })
 export class OrderDetailService {
 
-  
   url = environment.baseUrl+"/api/order-detail";
 
   constructor(private httpClient: HttpClient) { }
@@ -25,7 +24,6 @@ export class OrderDetailService {
     order.id = orderId;
     return this.httpClient.post<DialogProduct[]>(`${this.url}/dialog-products`, order );
   }
-
   updateDetails(orderId:number, cartProducts:CartTableData[]):Observable<OrderDetail[]>{
     let orderDetails: OrderDetail[]=[] ;
 
@@ -46,61 +44,41 @@ export class OrderDetailService {
 
     return  this,this.httpClient.post<OrderDetail[]>(`${this.url}/update`,orderDetails);
   }
-
   save(employeeId: number, 
     clientId: number, 
     cartProducts: CartTableData[]): Observable<OrderDetail[]>{
-
-
- // create shopOrder class
- let shopOrder = new ShopOrder();
-
- // add employee
- let employee = new Employee();
- employee.id = employeeId;
- shopOrder.employee = employee;
-
- // add client
- let client = new Client();
- client.id = clientId;
- shopOrder.client = client;
-
- // at this stage, the of the purchase is at id  2
- shopOrder.orderStatus = {
-   id: 2,
-   status:""
- }
- 
- // create orderDetail 
- let orderDetails: OrderDetail[] = [];
-
- cartProducts.forEach(cartProduct=>{
-   
-   let product = new Product();
-   product.id = cartProduct.id;
-
-   let orderDetail = new OrderDetail();
-   orderDetail.quantity = cartProduct.qty;
-   orderDetail.product = product;
-   orderDetail.shopOrder = shopOrder;
-
-
-   orderDetails.push(orderDetail);
-
- })
-
-
- return this.httpClient.post<OrderDetail[]>(`${this.url}/save`, orderDetails);
- 
-
-}
-
+  // create shopOrder class
+  let shopOrder = new ShopOrder();
+  // add employee
+  let employee = new Employee();
+  employee.id = employeeId;
+  shopOrder.employee = employee;
+  // add client
+  let client = new Client();
+  client.id = clientId;
+  shopOrder.client = client;
+  // at this stage, the of the purchase is at id  2
+  shopOrder.orderStatus = {
+    id: 1,
+    status:""
+  }
+  // create orderDetail 
+  let orderDetails: OrderDetail[] = [];
+  cartProducts.forEach(cartProduct=>{
+    let product = new Product();
+    product.id = cartProduct.id;
+    let orderDetail = new OrderDetail();
+    orderDetail.quantity = cartProduct.qty;
+    orderDetail.product = product;
+    orderDetail.shopOrder = shopOrder;
+    orderDetails.push(orderDetail);
+  })
+  return this.httpClient.post<OrderDetail[]>(`${this.url}/save`, orderDetails);
+  }
   getAllByOrder(orderId:number):Observable<OrderDetail[]>{
     let order = new ShopOrder();
     order.id = orderId;
 
     return this.httpClient.post<OrderDetail[]>(`${this.url}/by-order`, order);
   }  
-
-
 }

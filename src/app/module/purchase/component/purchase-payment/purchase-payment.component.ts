@@ -49,20 +49,16 @@ export class PurchasePaymentComponent implements OnInit {
     .subscribe({
       next:(data)=>{
         alert("Paiement effectué");
-        console.log(data);
-   
+        console.log(
+          `Response from purchasePaymentService.makePayment`,
+          data);
         // close the dialog
         this.closeDialog();
-
-
-
       },
       error:(err)=>{
         console.log("Error making payment", err);
       }
     })
-
-
   }
 
   

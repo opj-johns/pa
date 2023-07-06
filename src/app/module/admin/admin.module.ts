@@ -6,7 +6,7 @@ import { AdminHomeComponent } from 'src/app/component/admin/admin-home/admin-hom
 import { ChartsModule } from 'src/app/shared/charts/charts.module';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 import { SettingsComponent } from 'src/app/component/admin/settings/settings.component';
-import { LoginComponent } from 'src/app/component/app/login/login.component';
+import { LoginComponent } from 'src/app/module/auth/components/login/login.component';
 
 
 @NgModule({
@@ -14,7 +14,6 @@ import { LoginComponent } from 'src/app/component/app/login/login.component';
     DashboardComponent, // dashboard module
     AdminHomeComponent, // admin module
     SettingsComponent, // settings module
-    LoginComponent
   ],
   imports: [
     AdminRoutingModule,

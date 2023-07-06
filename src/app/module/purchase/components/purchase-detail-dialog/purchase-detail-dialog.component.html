@@ -6,23 +6,27 @@
         <div class="container-fluid">
         <div class="row">
             <div class="col-4">
-                    <mat-form-field class="example-full-width"  appearance="fill">
-                      <mat-label>Prix d'achat <i class="bi bi-currency-dollar fs-6 ps-1 text-success"></i></mat-label>
-                      <input matInput name="amountPaid" type="number" min="1" required="true"  [(ngModel)]="purchasePrice" name="purchasePrice">
-                    </mat-form-field>
+                  <p class="fs-5">
+                    Prix d'achat: <span class="fw-bold text-success">{{purchasePrice}}</span>
+                  </p>
+                  <p class="fs-5">
+                    Prix de vente: <span class="fw-bold text-success"> {{sellingPrice}}</span>
+                  </p> 
             </div>
             
             <div class="col-4">
-                    <mat-form-field class="example-full-width"  appearance="fill">
-                      <mat-label>Prix de vente <i class="bi bi-currency-dollar fs-6 ps-1 text-success"></i></mat-label>
-                      <input matInput name="amountPaid" type="number" min="1" required="true"  [(ngModel)]="sellingPrice" name="sellingPrice">
-                    </mat-form-field>
+                  <p class="fs-5">
+                    Qté déja en stock: <span class="fw-bold text-success">{{oldStockQuantity}}</span> 
+                  </p>  
+                  <p class="fs-5">
+                    Nouveau quantité en stock: <span class="fw-bold text-success">{{quantity+oldStockQuantity}}</span>  
+                  </p>  
             </div>
             
             <div class="col-4">
                     <mat-form-field class="example-full-width"  appearance="fill">
                       <mat-label>Quantité <i class="bi bi-bag-plus fs-6 ps-1 text-success"></i> </mat-label>
-                      <input matInput name="amountPaid" type="number" required="true" min="1" [(ngModel)]="quantity" name="quantity">
+                      <input matInput type="number" required="true" min="1" [(ngModel)]="quantity" name="quantity">
                     </mat-form-field>
             </div>
             
@@ -36,7 +40,6 @@
         <button mat-raised-button    type="button"
                 (click)="onOkClicked()" 
                 [disabled]="purchaseDetailForm.invalid || sellingPrice==0 ||  purchasePrice==0 || quantity==0">Ok</button>
-      <button mat-button (click)="closeDialog()"  cdkFocusInitial>Annuler</button>
+      <button mat-button (click)="closeDialogV1()"  cdkFocusInitial>Annuler</button>
     </mat-dialog-actions>
-    
     </form>

@@ -6,33 +6,42 @@
     </div>
     <div class="row text-center">
         <div class="col">
-            <app-supplier-select [supplierName]="supplierName" ></app-supplier-select>
+            <app-supplier-select></app-supplier-select>
         </div>
-        <div class="col"> <app-purchase-date></app-purchase-date> </div>
-        <div class="col"><app-purchase-ttc></app-purchase-ttc></div>
+        <div class="col">
+            <app-purchase-date></app-purchase-date>
+        </div>
+        <div class="col">
+            <app-purchase-ttc></app-purchase-ttc>
+        </div>
     </div>
     <div class="row">
         <div class="col fs-6 text-center text-success mt-2">Produits du Fournisseur</div>
         <div class="col fs-6 text-center text-success mt-2 ">Entrer dans stock</div>
     </div>
     <div class="row">
-        <div class="col"><app-supplier-product-table></app-supplier-product-table></div>
-        <div class="col"><app-purchase-cart-table></app-purchase-cart-table></div>
+        <div class="col">
+            <app-supplier-product-table></app-supplier-product-table>
+        </div>
+        <div class="col">
+            <app-purchase-cart-table></app-purchase-cart-table>
+        </div>
     </div>
     <div class="row text-center">
-       
         <div class="col text-center pt-3 mt-2" *ngIf="!supplierName">
             <button mat-raised-button 
                     color="accent" 
                     [disabled]="purchaseDetailsSize<1||purchaseDate==undefined||supplier==undefined"
                     (click)="onPurchase()"
-                    >Valider</button>
+                    >
+                Valider
+            </button>
         </div>
         <div class="col text-center pt-3 mt-2" *ngIf="supplierName">
             <button mat-raised-button 
-                    
                     [disabled]="purchaseDetailsSize<1||purchaseDate==undefined||supplier==undefined"
-                    (click)="onUpdatePurchase()">Metter à jour</button>
+                    (click)="onUpdatePurchase()">Metter à jour
+            </button>
         </div>
     </div>
 </div>
